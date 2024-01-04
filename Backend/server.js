@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/connection.js';
+import userRoutes from './routes/userRoutes.js'
 
 dotenv.config()
 const PORT = process.env.PORT || 3000
@@ -20,4 +21,4 @@ connectDB().then(() => {
   console.error('Failed to connect to the database:', error);
 });
 
-app.get("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
