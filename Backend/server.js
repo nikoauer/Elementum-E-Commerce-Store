@@ -20,6 +20,4 @@ connectDB().then(() => {
   console.error('Failed to connect to the database:', error);
 });
 
-app.get("/", (req, res) => {
-  res.send("hello world")
-})
+app.get("/api/users", userRoutes);
