@@ -1,6 +1,7 @@
 import User from '../models/userModels.js'
 import asyncHandler from '../middlewares/asyncHandler.js';
 import bcrypt from "bcryptjs";
+import createToken from '../utils/token.js'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -29,6 +30,7 @@ const createUser = asyncHandler(async (req, res) => {
 
     try {
         await newUser.save()
+        createToken(res, newUser._id);
         res.status(201).json({
             _id: newUser._id,
             username: newUser.username,
