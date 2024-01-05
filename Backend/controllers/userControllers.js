@@ -43,4 +43,30 @@ const createUser = asyncHandler(async (req, res) => {
     }
 })
 
-export { createUser }
+const loginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+
+    let isValidPassword = false;
+
+    if (existingUser) {
+        isValidPassword = await bcrypt.compare(password, existingUser.password);
+    }
+
+    if (isValidPassword) {
+        createToken(res, existingUser._id);
+
+        res.status(201).json({
+            _id: existingUser._id,
+            username: existingUser.username,
+            email: existingUser.email,
+            isAdmin: existingUser.isAdmin
+        });
+
+        return;
+    }
+    res.status(401).json({ error: 'Invalid credentials' });
+});
+
+export { createUser, loginUser }
