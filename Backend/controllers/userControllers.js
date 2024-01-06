@@ -83,12 +83,6 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 })
 
-//Get all users
-const getAllUsers = asyncHandler(async(req,res) => {
-    const users = await User.find({});
-    res.json(users)
-})
-
 //Get current user profile
 const getUserProfile = asyncHandler(async(req, res) => {
     const user = await User.findById(req.user._id)
@@ -113,7 +107,6 @@ const updateCurrentUser = asyncHandler(async(req, res) => {
         user.username = req.body.username || user.username;
 
         if (req.body.email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(req.body.email)) {
                 res.status(400).json({ error: "Invalid email format" });
                 return;
@@ -141,4 +134,4 @@ const updateCurrentUser = asyncHandler(async(req, res) => {
     }
 })
 
-export { createUser, loginUser, logoutUser, getAllUsers, getUserProfile, updateCurrentUser }
+export { createUser, loginUser, logoutUser, getUserProfile, updateCurrentUser }
