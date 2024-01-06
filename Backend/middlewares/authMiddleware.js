@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModels.js';
 import asyncHandler from './asyncHandler.js';
 
-const authUser = asyncHandler (async (req, res, next) => {
+const authenticateUser = asyncHandler (async (req, res, next) => {
     let token = req.cookies.jwt
     if (token) {
         try {
@@ -32,4 +32,4 @@ const authAdmin = (req, res, next) => {
     }
 }
 
-export { authUser, authAdmin };
+export { authenticateUser, authAdmin };
