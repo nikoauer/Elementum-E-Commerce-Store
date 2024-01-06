@@ -111,7 +111,7 @@ const updateCurrentUser = asyncHandler(async(req, res) => {
 
     if(user) {
         user.username = req.body.username || user.username;
-        
+
         if (req.body.email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(req.body.email)) {
@@ -122,7 +122,9 @@ const updateCurrentUser = asyncHandler(async(req, res) => {
         }
 
         if(req.body.password) {
-            user.password = req.body.password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(req.body.password, salt)
+            user.password = hashedPassword
         }
 
         const updatedUser = await user.save()
