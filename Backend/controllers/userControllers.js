@@ -5,6 +5,7 @@ import createToken from '../utils/token.js'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+//Creates a new user
 const createUser = asyncHandler(async (req, res) => {
     const {username, email, password} = req.body;
 
@@ -43,6 +44,7 @@ const createUser = asyncHandler(async (req, res) => {
     }
 })
 
+//Logins in an existing user
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -69,4 +71,16 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(401).json({ error: 'Invalid credentials' });
 });
 
-export { createUser, loginUser }
+//Logouts out the current user
+const logoutUser = asyncHandler(async (req, res) => {
+
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0),
+    });
+
+    res.status(200).json({ message: "Successfully logged out"})
+
+})
+
+export { createUser, loginUser, logoutUser }
