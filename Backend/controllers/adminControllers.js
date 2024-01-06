@@ -11,7 +11,7 @@ const getAllUsers = asyncHandler(async(req,res) => {
 
 //Delete a user by a specific ID
 const deleteUserById = asyncHandler(async(req, res) => {
-    const user = await User.findById(req.param.id)
+    const user = await User.findById(req.params.id)
 
     if(user) {
         if(user.isAdmin) {
@@ -22,7 +22,7 @@ const deleteUserById = asyncHandler(async(req, res) => {
         res.json({ message: "This user has been deleted"})
     } else {
         res.status(404)
-        throw new Error("Uszer not found")
+        throw new Error("User not found")
     }
 })
 
