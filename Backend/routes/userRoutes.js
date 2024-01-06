@@ -5,6 +5,7 @@ import {
   logoutUser,
   getAllUsers,
   getUserProfile,
+  updateCurrentUser
 } from "../controllers/userControllers.js";
 import { authAdmin, authenticateUser } from "../middlewares/authMiddleware.js";
 const router = express.Router();

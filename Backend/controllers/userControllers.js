@@ -105,4 +105,38 @@ const getUserProfile = asyncHandler(async(req, res) => {
     }
 })
 
-export { createUser, loginUser, logoutUser, getAllUsers, getUserProfile }
+//Update a logged in users profile
+const updateCurrentUser = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.user._id)
+
+    if(user) {
+        user.username = req.body.username || user.username;
+        
+        if (req.body.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(req.body.email)) {
+                res.status(400).json({ error: "Invalid email format" });
+                return;
+            }
+            user.email = req.body.email;
+        }
+
+        if(req.body.password) {
+            user.password = req.body.password
+        }
+
+        const updatedUser = await user.save()
+
+        res.json({
+            _id: updatedUser._id,
+            username: updatedUser.username,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin
+        })
+    } else {
+        res.status(404);
+        throw new Error ("User was not found")
+    }
+})
+
+export { createUser, loginUser, logoutUser, getAllUsers, getUserProfile, updateCurrentUser }
