@@ -4,9 +4,14 @@ import {
   loginUser,
   logoutUser,
   getUserProfile,
-  updateCurrentUser
+  updateCurrentUser,
 } from "../controllers/userControllers.js";
-import { getAllUsers, deleteUserById } from "../controllers/adminControllers.js";
+import {
+  getAllUsers,
+  deleteUserById,
+  getUserById,
+  updateUserById,
+} from "../controllers/adminControllers.js";
 import { authAdmin, authenticateUser } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
@@ -17,9 +22,16 @@ router
   .get(authenticateUser, authAdmin, getAllUsers);
 router.route("/login").post(loginUser);
 router.route("/logout").post(logoutUser);
-router.route("/profile").get(authenticateUser, getUserProfile).put(authenticateUser, updateCurrentUser);
+router
+  .route("/profile")
+  .get(authenticateUser, getUserProfile)
+  .put(authenticateUser, updateCurrentUser);
 
 //Admin Routes
-router.route('/:id').delete(authenticateUser, authAdmin, deleteUserById)
+router
+  .route("/:id")
+  .delete(authenticateUser, authAdmin, deleteUserById)
+  .get(authenticateUser, authAdmin, getUserById)
+  .put(authenticateUser, authAdmin, updateUserById)
 
 export default router;
