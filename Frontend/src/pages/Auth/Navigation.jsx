@@ -10,7 +10,7 @@ import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../../images/Logo.svg";
+import logo from "../../images/Logo3.svg";
 
 export default function Navigation() {
   const [isNavVisible, setNavVisibility] = useState(false);
@@ -23,7 +23,7 @@ export default function Navigation() {
       <nav class="bg-white border-gray-200 ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src={logo} class="" alt="Elementum Logo" />
+            <img src={logo} class="h-20" alt="Elementum Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap">
               Elementum
             </span>
