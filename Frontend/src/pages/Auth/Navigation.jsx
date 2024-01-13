@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navigation.css";
 import logo from "../../images/logo8.svg";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure} from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
@@ -12,11 +9,7 @@ import {
   BuildingStorefrontIcon,
   HomeIcon
 } from "@heroicons/react/24/outline";
-import { PlusIcon } from "@heroicons/react/20/solid";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Navigation() {
   return (
