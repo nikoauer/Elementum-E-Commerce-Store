@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo8.svg";
 import { Disclosure} from "@headlessui/react";
 import {
@@ -9,9 +9,33 @@ import {
   BuildingStorefrontIcon,
   HomeIcon
 } from "@heroicons/react/24/outline";
-
+import {useSelector, useDispatch} from 'react-redux';
+import { useLoginMutation } from "../../redux/api/usersAPISlice";
+import {logout} from '../../redux/features/auth/authSlice'
 
 export default function Navigation() {
+
+  const {userInfo} = useSelector(state => state.auth)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+    
+  const[logoutApiCall] = useLoginMutation()
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap()
+      dispatch(logout())
+      navigate('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const toggleDropdown = () => {
+    console.log("hello")
+  }
+
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -83,6 +107,8 @@ export default function Navigation() {
                     >
                       <Link to="/login">Login</Link>
                     </button>
+
+                    <button onClick={toggleDropdown} >{userInfo ? (<span className="text-white">{userInfo.username}</span>) : (<></>)}</button>
                   </div>
                 </div>
               </div>
