@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLoginMutation } from "../../redux/api/usersAPISlice";
 import {setCredientials} from '../../redux/features/auth/authSlice'
 import logo from '../../images/logo8.svg'
-import loadingSpinner from "../../components/loadingSpinner";
+import Loader from "../../components/loader";
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
     const[email, setEmail] = useState('')
@@ -17,7 +19,7 @@ const Login = () => {
     
     const {userInfo} = useSelector(state => state.auth)
 
-    const{search} = useLocation()
+    const {search} = useLocation()
     const sp = new URLSearchParams(search)
     const redirect = sp.get('redirect') || '/'
 
@@ -27,6 +29,17 @@ const Login = () => {
         }
     }, [navigate, redirect, userInfo]
     )
+
+    const submitHandler = async(e) => {
+        e.preventDefault()
+        try {
+            const result = await login({email, password}).unwrap()
+            console.log(result)
+            dispatch(setCredientials({...result}))
+        } catch (error) {
+            toast.error(error?.data?.message || error.message)
+        }
+    }
 
     return(
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -42,7 +55,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={submitHandler} method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -89,12 +102,12 @@ const Login = () => {
               >{isLoading ? 'Logging In...' : 'Login'}
               </button>
             </div>
-            {isLoading && <loadingSpinner />}
+            {isLoading && <Loader />}
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <Link to='/signup' className="font-semibold leading-6 text-sky-700 hover:text-sky-500">
+            <Link to={redirect ? `/signup?redirect=${redirect}` : '/signup'} className="font-semibold leading-6 text-sky-700 hover:text-sky-500">
                 Signup
             </Link>
           </p>
