@@ -1,40 +1,40 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo8.svg";
-import { Disclosure} from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
   HeartIcon,
   ShoppingCartIcon,
   BuildingStorefrontIcon,
-  HomeIcon
+  HomeIcon,
+  UserIcon
 } from "@heroicons/react/24/outline";
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { useLoginMutation } from "../../redux/api/usersAPISlice";
-import {logout} from '../../redux/features/auth/authSlice'
+import { logout } from "../../redux/features/auth/authSlice";
 
 export default function Navigation() {
+  const { userInfo } = useSelector((state) => state.auth);
 
-  const {userInfo} = useSelector(state => state.auth)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-    
-  const[logoutApiCall] = useLoginMutation()
+  const [logoutApiCall] = useLoginMutation();
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall().unwrap()
-      dispatch(logout())
-      navigate('/login')
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const toggleDropdown = () => {
-    console.log("hello")
-  }
+    console.log("hello");
+  };
 
   return (
     <Disclosure as="nav" className="bg-white shadow">
@@ -56,7 +56,11 @@ export default function Navigation() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-shrink-0 items-center">
-                  <img className="h-12 w-auto" src={logo} alt="Your Company" />
+                  <img
+                    className="h-12 w-auto"
+                    src={logo}
+                    alt="Elementum Logo"
+                  />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
                   <Link
@@ -75,9 +79,16 @@ export default function Navigation() {
               </div>
               <div className="flex items-center">
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+                  {userInfo && (
+                    <div className="inline-flex items-center  border-transparent px-3 pt-1 text-sm font-medium text-blue-600 hover:border-gray-300 hover:text-gray-500">
+                      <Link>
+                        {userInfo.username}
+                      </Link>
+                    </div>
+                  )}
                   <button
                     type="button"
-                    className="relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                    className="relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <Link to="/favourites">
                       <HeartIcon className="h-6 w-6" aria-hidden="true" />
@@ -85,7 +96,7 @@ export default function Navigation() {
                   </button>
                   <button
                     type="button"
-                    className="mx-2 relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                    className="mx-3 relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <Link to="/cart">
                       <ShoppingCartIcon
@@ -107,8 +118,6 @@ export default function Navigation() {
                     >
                       <Link to="/login">Login</Link>
                     </button>
-
-                    <button onClick={toggleDropdown} >{userInfo ? (<span className="text-white">{userInfo.username}</span>) : (<></>)}</button>
                   </div>
                 </div>
               </div>
@@ -122,8 +131,8 @@ export default function Navigation() {
                 className="flex items-center border-l-4 border-sky-500 bg-sky-100 py-2 pl-3 pr-4 text-base font-medium text-blue-700 sm:pl-5 sm:pr-6"
               >
                 <Link to="/" className="flex items-center">
-                    <HomeIcon className="h-6 w-6" />
-                    <span className="ml-2">Home</span>
+                  <HomeIcon className="h-6 w-6" />
+                  <span className="ml-2">Home</span>
                 </Link>
               </Disclosure.Button>
               <Disclosure.Button
@@ -140,8 +149,8 @@ export default function Navigation() {
                 className="flex items-center border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
               >
                 <Link to="/favourites" className="flex items-center">
-                  <HeartIcon className="h-6 w-6"/>
-                    <span className="ml-2">Favourites</span>
+                  <HeartIcon className="h-6 w-6" />
+                  <span className="ml-2">Favourites</span>
                 </Link>
               </Disclosure.Button>
               <Disclosure.Button
@@ -153,7 +162,7 @@ export default function Navigation() {
                   <span className="ml-2">Cart</span>
                 </Link>
               </Disclosure.Button>
-
+                  {/* Seperating line in menu */}
               <div className="relative">
                 <div
                   className="absolute inset-0 flex items-center"
@@ -165,6 +174,16 @@ export default function Navigation() {
                   <span className="bg-white px-2 text-gray-500"></span>
                 </div>
               </div>
+              {userInfo ? <Disclosure.Button
+                as="a"
+                className="flex items-center border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
+              >
+                <Link className="flex items-center">
+                  <UserIcon className="h-6 w-6" />
+                  <span className="ml-2">{userInfo.username}</span>
+                </Link>
+              </Disclosure.Button> : 
+              <>
               <Disclosure.Button
                 as="a"
                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
@@ -177,6 +196,8 @@ export default function Navigation() {
               >
                 <Link to="/signup">Sign Up</Link>
               </Disclosure.Button>
+              </>
+              }
             </div>
           </Disclosure.Panel>
         </>
