@@ -36,8 +36,10 @@ const Login = () => {
             const result = await login({email, password}).unwrap()
             console.log(result)
             dispatch(setCredientials({...result}))
+            toast.success("Successfully logged in 😊")
         } catch (error) {
-            toast.error(error?.data?.message || error.message)
+          console.log(error)
+          toast.error("Your password or email are incorrect!")
         }
     }
 

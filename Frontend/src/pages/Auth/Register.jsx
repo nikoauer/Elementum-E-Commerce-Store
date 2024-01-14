@@ -30,6 +30,23 @@ const Register = () => {
         }
     }, [navigate, redirect, userInfo])
 
+    const submitHandler = async (e) => {
+        e.preventDefault()
+            if(password !== confirmPassword){
+                toast.error('Passwords do not match')
+            } else {
+                try {
+                    const result = await register({username, email, password}).unwrap()
+                    dispatch(setCredientials({...result}))
+                    navigate(redirect)
+                    toast.success('User succesfully signed up!')
+                } catch (error) {
+                    console.log(error)
+                    toast.error(error.data.message)
+                }
+            }
+    }
+
     return(
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -44,7 +61,7 @@ const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" method="POST">
+          <form className="space-y-6" onSubmit={submitHandler} method="POST">
 
           <div>
               <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
@@ -54,7 +71,7 @@ const Register = () => {
                 <input
                   id="username"
                   name="username"
-                  type="email"
+                  type="text"
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
