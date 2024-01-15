@@ -49,7 +49,7 @@ const Register = () => {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-16 w-auto" src={logo} alt="logo" />
+        <img className="mx-auto h-24 w-auto" src={logo} alt="logo" />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign up for an <span className="text-sky-600">account.</span> Your
           next adventure is waiting
