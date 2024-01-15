@@ -43,12 +43,13 @@ const Profile = () => {
       };
 
       const pages = [
-        { name: 'Update Credentials', to:"/profile", current: false },
+        { name: 'Update Profile', to:"/profile", current: false },
         { name: 'My Orders', to: '/user-orders', current: true },
       ]
 
     return(
         <>
+        {/* Navigation for profile and orders */}
         <nav className="flex justify-center" aria-label="Breadcrumb">
         <ol role="list" className="flex items-center space-x-4">
           {pages.map((page) => (
@@ -67,11 +68,12 @@ const Profile = () => {
           ))}
         </ol>
       </nav>
+      {/* update profile section */}
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-24 w-auto" src={logo} alt="logo" />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            <span className="text-sky-600">Update</span> your credentials
+            <span className="text-sky-600">Update</span> your profile
           </h2>
         </div>
   
