@@ -62,7 +62,7 @@ const UserList = () => {
     <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">Users</h1>
+          <h1 className="pt-5 pb-5 font-semibold leading-6 text-gray-900 text-2xl">Users</h1>
           <p className="mt-2 text-sm text-gray-700">
             A list of all the users that have accounts currently on Elementum. It shows their id, name, email and whether they are an administrator. You can edit the users email, username or delete the user.
           </p>
