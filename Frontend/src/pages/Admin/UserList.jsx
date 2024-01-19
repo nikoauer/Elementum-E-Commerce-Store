@@ -6,7 +6,7 @@ import {   useGetUserQuery,
     useDeleteUserMutation,
     useUpdateUserMutation} from "../../redux/api/usersAPISlice"
 import Message from "../../components/Message";
-import { FaRegEdit, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaRegEdit, FaCheck, FaTimes, FaTrashAlt } from 'react-icons/fa';
 
 
 
@@ -35,6 +35,7 @@ const UserList = () => {
           try {
             await deleteUser(id);
             refetch();
+
           } catch (err) {
             toast.error(err?.data?.message || err.error);
           }
@@ -56,7 +57,7 @@ const UserList = () => {
       };
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 ">
+        <div className="px-4 sm:px-6 lg:px-8 flex justify-center items-center">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">Users</h1>
@@ -86,14 +87,11 @@ const UserList = () => {
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     ADMINISTRATOR
                   </th>
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white">
                 {users.map((user) => (
-                  <tr key={user._id} className="even:bg-gray-50">
+                  <tr key={user._id} className="even:bg-gray-100">
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-800 sm:pl-3">
                       {user._id}
                     </td>
@@ -101,7 +99,7 @@ const UserList = () => {
                     {editUserId === user._id ? (
                         <div>
                         <input
-                        className="rounded p-1"
+                        className="p-1"
                           type="text"
                           value={editUsername}
                           onChange={(e) => setEditUsername(e.target.value)}
@@ -126,16 +124,51 @@ const UserList = () => {
                         </div>
                     )}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-700">{user.email}</td>
-                    <td className="whitespace-nowrap px-3 py-4 flex justify-center">{user.isAdmin ? (
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-700">
+                    {editUserId === user._id ? (
+                        <div>
+                        <input
+                        className="p-1"
+                          type="text"
+                          value={editUserEmail}
+                          onChange={(e) => setEditUserEmail(e.target.value)}
+                        />
+                        <button onClick={() => updateHandler(user._id)}>
+                        <FaCheck className="text-green-600 mx-1.5"/>
+                    </button>
+                    <button onClick={() => seteditUserId(null)}>
+                        <FaTimes className="text-red-600"/>
+                    </button>
+                        </div>
+                    ) : (
+                        <div>
+                         <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
+                        <button
+                          onClick={() =>
+                            toggleEdit(user._id, user.username, user.email)
+                          }
+                        >
+                          <FaRegEdit className="mx-1 hover:text-blue-600" />
+                        </button>
+                        </div>
+                    )}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4">{user.isAdmin ? (
                         <CheckCircleIcon className="h-6 text-green-600"></CheckCircleIcon>
                     ) : (
                         <XCircleIcon className="h-6 text-red-600"></XCircleIcon>
                     )}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                      <a href="#" className="text-red-600 hover:text-red-800">
-                        Delete<span className="sr-only">, {user.name}</span>
-                      </a>
+                      {!user.isAdmin && (
+                      <div className="flex">
+                        <button
+                          onClick={() => deleteHandler(user._id)}
+                          className="rounded-full bg-red-600 p-2 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
+                    )}
                     </td>
                   </tr>
                 ))}
