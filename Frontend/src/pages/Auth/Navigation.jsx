@@ -157,7 +157,7 @@ export default function Navigation() {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <Link
-                                      to="/admin/"
+                                      to="/admin/categorylist"
                                       className={classNames(
                                         active
                                           ? "bg-gray-100 text-gray-900"
