@@ -9,7 +9,7 @@ const CategoryForm = ({
 }) => {
   return (
     <div className="my-10">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-xl mx-auto">
         <form onSubmit={handleSubmit} className="space-y-2">
           <input
             type="text"
