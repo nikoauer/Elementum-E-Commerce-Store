@@ -35,9 +35,9 @@ const UserList = () => {
           try {
             await deleteUser(id);
             refetch();
-
+            toast.success("User successfuly deleted")
           } catch (err) {
-            toast.error(err?.data?.message || err.error);
+            toast.error("There was an error while deleting");
           }
         }
       };
@@ -51,8 +51,9 @@ const UserList = () => {
           });
           setEditUserId(null);
           refetch();
+          toast.success("User successfuly updated")
         } catch (err) {
-          toast.error(err?.data?.message || err.error);
+          toast.error("There was an error while updating");
         }
       };
 
