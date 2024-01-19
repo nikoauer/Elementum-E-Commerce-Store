@@ -56,8 +56,7 @@ const updateUserById = asyncHandler(async(req, res) => {
             isAdmin: updatedUser.isAdmin
         })
     } else {
-        res.status(404)
-        throw new Error('User not found')
+        res.status(404).send('User not found')
     }
 })
 

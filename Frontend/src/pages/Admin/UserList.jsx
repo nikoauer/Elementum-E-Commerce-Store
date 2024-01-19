@@ -16,7 +16,7 @@ const UserList = () => {
     const [deleteUser] = useDeleteUserMutation()
     const [updateUser] = useUpdateUserMutation()
 
-    const [editUserId, seteditUserId] = useState(null)
+    const [editUserId, setEditUserId] = useState(null)
     const [editUsername, setEditUsername] = useState('')
     const [editUserEmail, setEditUserEmail] = useState('')
 
@@ -25,13 +25,13 @@ const UserList = () => {
     }, [refetch]);
 
     const toggleEdit = (id, username, email) => {
-        seteditUserId(id);
+        setEditUserId(id);
         setEditUsername(username);
         setEditUserEmail(email);
       };
 
       const deleteHandler = async (id) => {
-        if (window.confirm("Are you sure?")) {
+        if (window.confirm("Are you sure you want to delete this user?")) {
           try {
             await deleteUser(id);
             refetch();
@@ -45,11 +45,11 @@ const UserList = () => {
       const updateHandler = async (id) => {
         try {
           await updateUser({
-            userId: id,
+            id: id,
             username: editUsername,
             email: editUserEmail,
           });
-          seteditUserId(null);
+          setEditUserId(null);
           refetch();
         } catch (err) {
           toast.error(err?.data?.message || err.error);
@@ -108,7 +108,7 @@ const UserList = () => {
                         <button onClick={() => updateHandler(user._id)}>
                         <FaCheck className="text-green-600 mx-1.5"/>
                     </button>
-                    <button onClick={() => seteditUserId(null)}>
+                    <button onClick={() => setEditUserId(null)}>
                         <FaTimes className="text-red-600"/>
                     </button>
                         </div>
@@ -137,7 +137,7 @@ const UserList = () => {
                         <button onClick={() => updateHandler(user._id)}>
                         <FaCheck className="text-green-600 mx-1.5"/>
                     </button>
-                    <button onClick={() => seteditUserId(null)}>
+                    <button onClick={() => setEditUserId(null)}>
                         <FaTimes className="text-red-600"/>
                     </button>
                         </div>
