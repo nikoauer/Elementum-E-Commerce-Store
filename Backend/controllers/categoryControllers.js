@@ -65,5 +65,14 @@ const listofCategories = asyncHandler(async(req, res) => {
     }
 })
 
+const readCategory = asyncHandler(async(req, res) => {
+    try {
+        const category = await Category.findOne({_id: req.params.id})
+        res.json(category)
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({error: "Cannot read category"})
+    }
+})
 
-export {createCategory, updateCategory, deleteCategory, listofCategories}
+export {createCategory, updateCategory, deleteCategory, listofCategories, readCategory}
