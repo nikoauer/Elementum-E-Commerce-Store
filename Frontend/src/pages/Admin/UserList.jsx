@@ -57,7 +57,8 @@ const UserList = () => {
       };
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+    <div className="flex items-center justify-center">
+    <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">Users</h1>
@@ -178,6 +179,7 @@ const UserList = () => {
         </div>
       </div>
         )}
+    </div>
     </div>
     )
 }
