@@ -21,7 +21,6 @@ const CategoryList = () => {
   const [deleteCategory] = useDeleteCategoryMutation();
 
   const handleUpdateCategory = async (event) => {
-    event.preventDefault();
 
     if (!selectedCategory) {
       toast.error("No category selected");
@@ -163,7 +162,7 @@ const CategoryList = () => {
           value={updateName}
           setValue={(value) => setUpdateName(value)}
           handleDelete={handleDeleteCategory}
-          handleSubmit={handleUpdateCategory}
+          handleUpdate={handleUpdateCategory}
         ></CategoryModal>
       </div>
       <div></div>
