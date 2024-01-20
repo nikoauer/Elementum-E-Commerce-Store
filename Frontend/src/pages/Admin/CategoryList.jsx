@@ -6,19 +6,53 @@ import {
   useDeleteCategoryMutation,
   useFetchallCategoriesQuery,
 } from "../../redux/api/categoryAPISlice";
-import CategoryForm from "../../components/CategoryForm";
 import { TbCategory2 } from "react-icons/tb";
+import CategoryModal from "../../components/Modal";
 
 const CategoryList = () => {
   const { data: categories } = useFetchallCategoriesQuery();
   const [name, setName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [updateName, setUpdateName] = useState("");
-  const [modal, setModal] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [createCategory] = useCreateCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
-  const [deleteCategory] = useUpdateCategoryMutation();
+  const [deleteCategory] = useDeleteCategoryMutation();
+
+  const handleUpdateCategory = async (event) => {
+    event.preventDefault();
+
+    if (!selectedCategory) {
+      toast.error("No category selected");
+      return;
+    }
+
+    if (!updateName) {
+      toast.error("Category name is required");
+      return;
+    }
+
+    try {
+      const result = await updateCategory({
+        categoryId: selectedCategory._id,
+        updateCategory: {
+          name: updateName,
+        },
+      }).unwrap();
+
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(`${result.name} is updated`);
+        setSelectedCategory(null);
+        setUpdateName("");
+        setModalVisible(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleCreateCategory = async (event) => {
     event.preventDefault();
@@ -30,8 +64,9 @@ const CategoryList = () => {
 
     try {
       const result = await createCategory({ name }).unwrap();
+
       if (result.error) {
-        toast.error(results.error);
+        toast.error(result.error);
       } else {
         setName("");
         toast.success(`${result.name} is created`);
@@ -39,6 +74,28 @@ const CategoryList = () => {
     } catch (error) {
       console.error(error);
       toast.error("Creating a category failed.");
+    }
+  };
+
+  const handleDeleteCategory = async () => {
+    try {
+      if (!selectedCategory || !selectedCategory._id) {
+        toast.error("Invalid category selected");
+        return;
+      }
+  
+      const result = await deleteCategory({ categoryId: selectedCategory._id }).unwrap();
+  
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(`${result.name} is deleted.`);
+        setSelectedCategory(null);
+        setModalVisible(false);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Category deletion failed. Try again.");
     }
   };
 
@@ -56,11 +113,26 @@ const CategoryList = () => {
             </p>
           </div>
         </div>
-        <CategoryForm
-          value={name}
-          setValue={setName}
-          handleSubmit={handleCreateCategory}
-        />
+        <div className="my-10">
+          <div className="max-w-xl mx-auto">
+            <form className="space-y-2" >
+              <input
+              name="categoryform"
+                type="text"
+                className="py-2 px-3 border rounded-lg w-full"
+                placeholder="Create category name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <div className="flex justify-evenly">
+                <button onClick={handleCreateCategory} className="bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-2 foucs:ring-sky-500 focus:ring-opacity-50">
+                  Create Category
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         <ul role="list" className="divide-y divide-gray-100">
           {categories?.map((category) => (
             <li
@@ -74,11 +146,9 @@ const CategoryList = () => {
                 <button
                   className="text-sm font-semibold leading-6 text-gray-800 hover:text-blue-500"
                   onClick={() => {
-                    {
-                      setModal(true);
-                      setSelectedCategory(category);
-                      setUpdateName(category.name);
-                    }
+                    setModalVisible(true);
+                    setSelectedCategory(category);
+                    setUpdateName(category.name);
                   }}
                 >
                   {category.name}
@@ -87,6 +157,14 @@ const CategoryList = () => {
             </li>
           ))}
         </ul>
+        <CategoryModal
+          isOpen={modalVisible}
+          onClose={() => setModalVisible(false)}
+          value={updateName}
+          setValue={(value) => setUpdateName(value)}
+          handleDelete={handleDeleteCategory}
+          handleSubmit={handleUpdateCategory}
+        ></CategoryModal>
       </div>
       <div></div>
     </div>

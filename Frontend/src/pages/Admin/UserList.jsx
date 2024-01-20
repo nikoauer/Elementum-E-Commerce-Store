@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import {  CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import {   useGetUserQuery,
