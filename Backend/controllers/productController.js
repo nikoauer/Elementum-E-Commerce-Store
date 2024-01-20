@@ -133,4 +133,17 @@ const fetchProductById = asyncHandler(async(req, res) => {
     }
 })
 
-export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById };
+const fetchallProducts = asyncHandler(async(req, res) => {
+    try {
+        
+        const allProducts = await Product.find({}). populate('category').limit(18).sort({createAt: -1})
+
+        res.json(allProducts)
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: "Server error"})
+    }
+})
+
+export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById, fetchallProducts };

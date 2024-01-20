@@ -11,12 +11,15 @@ import {
   deleteProduct,
   fetchProductById,
   getAllProducts,
+  fetchallProducts,
 } from "../controllers/productController.js";
 
 router
   .route("/")
   .post(authenticateUser, authAdmin, addProduct)
   .get(getAllProducts);
+
+router.route('/allproducts').get(fetchallProducts)
 
 router
   .route("/:id")
