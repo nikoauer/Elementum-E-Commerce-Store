@@ -91,7 +91,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 const getAllProducts = asyncHandler(async (req, res) => {
   try {
-    const pageSize = 6;
+    const pageSize = 9;
     const keyword = req.query.keyword
       ? { name: { $regex: req.query.keyword, $options: "i" } }
       : {};
@@ -113,4 +113,24 @@ const getAllProducts = asyncHandler(async (req, res) => {
   }
 });
 
-export { addProduct, updateProductDetails, deleteProduct, getAllProducts };
+const fetchProductById = asyncHandler(async(req, res) => {
+    try {
+
+        const product = await Product. findById(req.params.id)
+
+        if(product) {
+            return res.json(product)
+        } else {
+            res.status(404)
+            throw new Error("Product could not be found")
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res
+          .status(404)
+          .json({ error: "Product could not be found" });
+    }
+})
+
+export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById };

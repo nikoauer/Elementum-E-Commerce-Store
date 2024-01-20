@@ -9,11 +9,19 @@ import {
   addProduct,
   updateProductDetails,
   deleteProduct,
-  getAllProducts
+  fetchProductById,
+  getAllProducts,
 } from "../controllers/productController.js";
 
-router.route("/").post(authenticateUser, authAdmin, addProduct).get(getAllProducts)
+router
+  .route("/")
+  .post(authenticateUser, authAdmin, addProduct)
+  .get(getAllProducts);
 
-router.route("/:id").put(authenticateUser, authAdmin, updateProductDetails).delete(authenticateUser, authAdmin, deleteProduct)
+router
+  .route("/:id")
+  .get(fetchProductById)
+  .put(authenticateUser, authAdmin, updateProductDetails)
+  .delete(authenticateUser, authAdmin, deleteProduct);
 
 export default router;
