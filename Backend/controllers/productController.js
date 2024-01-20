@@ -146,4 +146,42 @@ const fetchallProducts = asyncHandler(async(req, res) => {
     }
 })
 
-export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById, fetchallProducts };
+const addReview = asyncHandler(async(req, res) => {
+    try {
+        
+        const {rating, comment} = req.body
+        const product = await Product.findById(req.params.id)
+
+        if (product) {
+            const existingReviews = product.reviews.find(r => r.user.toString() === req.user._id.toString())
+
+            if(existingReviews) {
+                res.status(400)
+                throw new Error("Product already reviewed")
+            }
+
+            const review = {
+                name: req.user.username,
+                rating: Number(rating),
+                comment,
+                user: req.user._id
+            }
+
+            product.review.push(review)
+            product.numReviews = product.reviews.length
+            product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
+
+            await product.save(
+            res.status(201).json({ message: "Review added"})
+            )
+        } else {
+            res.status(404).json({ error: "Product not found" });
+        }
+
+    } catch (error) {
+        console.error(error)
+        res.status(400).json({error: "Server error"})
+    }
+})
+
+export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById, fetchallProducts, addReview };
