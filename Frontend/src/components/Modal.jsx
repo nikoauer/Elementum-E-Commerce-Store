@@ -2,8 +2,6 @@ import { IoMdClose } from "react-icons/io";
 
 
 const CategoryModal = ({ isOpen, onClose, handleDelete, handleUpdate, value, setValue }) => {
-
-
   return (
     <>
       {isOpen && (

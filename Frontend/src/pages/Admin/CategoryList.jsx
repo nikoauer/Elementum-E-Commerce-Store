@@ -20,8 +20,7 @@ const CategoryList = () => {
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
 
-  const handleUpdateCategory = async (event) => {
-
+  const handleUpdateCategory = async () => {
     if (!selectedCategory) {
       toast.error("No category selected");
       return;
