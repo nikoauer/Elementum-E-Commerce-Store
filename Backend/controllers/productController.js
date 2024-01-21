@@ -186,7 +186,7 @@ const addReview = asyncHandler(async(req, res) => {
 
 const getTopProducts = asyncHandler(async(req, res) => {
     try {
-        const products = await Product.find({}).sort({rating: -1}).limit(4)
+        const products = await Product.find({}).sort({rating: -1}).limit(6)
         res.json(products)
     } catch (error) {
         console.error(error)
@@ -194,4 +194,16 @@ const getTopProducts = asyncHandler(async(req, res) => {
     }
 })
 
-export { addProduct, updateProductDetails, deleteProduct, getAllProducts, getTopProducts, fetchProductById, fetchallProducts, addReview };
+const getNewProducts = asyncHandler(async(req, res) => {
+    try {
+        
+        const newProducts = await Product.find().sort({ _id: -1 }).limit(6);
+        res.json(newProducts)
+
+    } catch (error) {
+        console.error(error)
+        res.status(400).json(error.message)
+    }
+})
+
+export { addProduct, getNewProducts, updateProductDetails, deleteProduct, getAllProducts, getTopProducts, fetchProductById, fetchallProducts, addReview };

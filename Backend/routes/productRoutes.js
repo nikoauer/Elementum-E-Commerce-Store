@@ -14,6 +14,7 @@ import {
   fetchallProducts,
   addReview,
   getTopProducts,
+  getNewProducts
 } from "../controllers/productController.js";
 
 router
@@ -25,6 +26,7 @@ router.route('/allproducts').get(fetchallProducts)
 router.route('/:id/reviews').post(authenticateUser, checkID, addReview)
 
 router.get('/top', getTopProducts)
+router.get('/new', getNewProducts)
 
 router
   .route("/:id")
