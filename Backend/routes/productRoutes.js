@@ -13,6 +13,7 @@ import {
   getAllProducts,
   fetchallProducts,
   addReview,
+  getTopProducts,
 } from "../controllers/productController.js";
 
 router
@@ -21,7 +22,9 @@ router
   .get(getAllProducts);
 
 router.route('/allproducts').get(fetchallProducts)
-router.route('/:id/reviews').post(authenticateUser, authAdmin, addReview)
+router.route('/:id/reviews').post(authenticateUser, checkID, addReview)
+
+router.get('/top', getTopProducts)
 
 router
   .route("/:id")

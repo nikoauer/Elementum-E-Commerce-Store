@@ -91,7 +91,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 const getAllProducts = asyncHandler(async (req, res) => {
   try {
-    const pageSize = 9;
+    const pageSize = 6;
     const keyword = req.query.keyword
       ? { name: { $regex: req.query.keyword, $options: "i" } }
       : {};
@@ -136,7 +136,7 @@ const fetchProductById = asyncHandler(async(req, res) => {
 const fetchallProducts = asyncHandler(async(req, res) => {
     try {
         
-        const allProducts = await Product.find({}). populate('category').limit(18).sort({createAt: -1})
+        const allProducts = await Product.find({}). populate('category').limit(12).sort({createAt: -1})
 
         res.json(allProducts)
 
@@ -167,7 +167,7 @@ const addReview = asyncHandler(async(req, res) => {
                 user: req.user._id
             }
 
-            product.review.push(review)
+            product.reviews.push(review)
             product.numReviews = product.reviews.length
             product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
 
@@ -180,8 +180,18 @@ const addReview = asyncHandler(async(req, res) => {
 
     } catch (error) {
         console.error(error)
-        res.status(400).json({error: "Server error"})
+        res.status(400).json(error.message)
     }
 })
 
-export { addProduct, updateProductDetails, deleteProduct, getAllProducts, fetchProductById, fetchallProducts, addReview };
+const getTopProducts = asyncHandler(async(req, res) => {
+    try {
+        const products = await Product.find({}).sort({rating: -1}).limit(4)
+        res.json(products)
+    } catch (error) {
+        console.error(error)
+        res.status(400).json(error.message)
+    }
+})
+
+export { addProduct, updateProductDetails, deleteProduct, getAllProducts, getTopProducts, fetchProductById, fetchallProducts, addReview };
