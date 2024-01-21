@@ -61,8 +61,18 @@ export const productApiSlice = apiSlice.injectEndpoints({
                 url: `${PRODUCT_URL}/${data.productId}/reviews`,
                 method: "POST",
                 body: data
-            })
-        })
+            }),
+        }),
+
+        getTopProducts: builder.query({
+            query: () => `${PRODUCT_URL}/top`,
+            keepUnusedDataFor: 5,
+        }),
+
+        getNewProducts: builder.query({
+            query: () => `${PRODUCT_URL}/new`,
+            keepUnusedDataFor: 5,
+        }),
 
     })
 })
