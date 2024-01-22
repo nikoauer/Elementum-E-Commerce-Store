@@ -33,10 +33,10 @@ const Login = () => {
       const result = await login({ email, password }).unwrap();
       console.log(result);
       dispatch(setCredientials({ ...result }));
-      toast.success("Successfully logged in 😊");
+      toast.success("Successfully logged in 😊", {position: "top-center"});
     } catch (error) {
       console.log(error);
-      toast.error("Your password or email are incorrect!");
+      toast.error("Your password or email are incorrect!", {position: "top-center"});
     }
   };
 

@@ -29,15 +29,15 @@ const Profile = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-          toast.error("Passwords do not match");
+          toast.error("Passwords do not match"), {position: "top-center"};
         } else {
           try {
             const result = await updateProfile({ _id: userInfo._id, username, email, password }).unwrap();
             dispatch(setCredientials({ ...result }));
-            toast.success("Profile succesfully updated!");
+            toast.success("Profile succesfully updated!", {position: "top-center"});
           } catch (error) {
             console.log(error);
-            toast.error(error?.data?.message || error.message);
+            toast.error(error?.data?.message || error.message, {position: "top-center"});
           }
         }
       };

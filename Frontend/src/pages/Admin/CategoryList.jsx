@@ -22,12 +22,12 @@ const CategoryList = () => {
 
   const handleUpdateCategory = async () => {
     if (!selectedCategory) {
-      toast.error("No category selected");
+      toast.error("No category selected", {position: "top-center"});
       return;
     }
 
     if (!updateName) {
-      toast.error("Category name is required");
+      toast.error("Category name is required", {position: "top-center"});
       return;
     }
 
@@ -40,9 +40,9 @@ const CategoryList = () => {
       }).unwrap();
 
       if (result.error) {
-        toast.error(result.error);
+        toast.error(result.error, {position: "top-center"});
       } else {
-        toast.success(`${result.name} is updated`);
+        toast.success(`${result.name} is updated`, {position: "top-center"});
         setSelectedCategory(null);
         setUpdateName("");
         setModalVisible(false);
@@ -56,7 +56,7 @@ const CategoryList = () => {
     event.preventDefault();
 
     if (!name) {
-      toast.error("Category name is required");
+      toast.error("Category name is required", {position: "top-center"});
       return;
     }
 
@@ -67,33 +67,33 @@ const CategoryList = () => {
         toast.error(result.error);
       } else {
         setName("");
-        toast.success(`${result.name} is created`);
+        toast.success(`${result.name} is created`, {position: "top-center"});
       }
     } catch (error) {
       console.error(error);
-      toast.error("Creating a category failed.");
+      toast.error("Creating a category failed.", {position: "top-center"});
     }
   };
 
   const handleDeleteCategory = async () => {
     try {
       if (!selectedCategory || !selectedCategory._id) {
-        toast.error("Invalid category selected");
+        toast.error("Invalid category selected", {position: "top-center"});
         return;
       }
   
       const result = await deleteCategory({ categoryId: selectedCategory._id }).unwrap();
   
       if (result.error) {
-        toast.error(result.error);
+        toast.error(result.error, {position: "top-center"});
       } else {
-        toast.success(`${result.name} is deleted.`);
+        toast.success(`${result.name} is deleted.`, {position: "top-center"});
         setSelectedCategory(null);
         setModalVisible(false);
       }
     } catch (error) {
       console.error(error);
-      toast.error("Category deletion failed. Try again.");
+      toast.error("Category deletion failed. Try again.", {position: "top-center"});
     }
   };
 

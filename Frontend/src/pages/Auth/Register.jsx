@@ -32,16 +32,16 @@ const Register = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error("Passwords do not match", {position: "top-center"});
     } else {
       try {
         const result = await register({ username, email, password }).unwrap();
         dispatch(setCredientials({ ...result }));
         navigate(redirect);
-        toast.success("User succesfully signed up!");
+        toast.success("User succesfully signed up!", {position: "top-center"});
       } catch (error) {
         console.log(error);
-        toast.error(error.data.message);
+        toast.error(error.data.message, {position: "top-center"});
       }
     }
   };
