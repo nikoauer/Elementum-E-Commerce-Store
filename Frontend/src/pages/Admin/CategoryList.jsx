@@ -164,7 +164,6 @@ const CategoryList = () => {
           handleUpdate={handleUpdateCategory}
         ></CategoryModal>
       </div>
-      <div></div>
     </div>
   );
 };
