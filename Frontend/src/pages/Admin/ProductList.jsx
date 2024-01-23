@@ -26,7 +26,22 @@ const ProductList = () => {
     const [ createProduct ] = useCreateProductMutation()
     const {data: categories} = useFetchallCategoriesQuery()
 
-    const uploadFileHandler = () => {
+    const uploadFileHandler = async (event) => {
+
+      const formData = new FormData()
+      formData.append('image', event.target.files[0])
+
+      try {
+        const response = await uploadProductImage(formData).unwrap()
+        toast.success(response.message, {position: "top-center"})
+        setImage(response.image)
+        setImageURL(response.image)
+      } catch (error) {
+        toast.error(error?.data?.message || error.error, {position: "top-center"})
+      }
+    }
+
+    const handleSubmit = () => {
 
     }
 
@@ -57,7 +72,7 @@ const ProductList = () => {
         <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
 
           <div className="col-span-full">
-            <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Product photo
             </label>
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
@@ -65,11 +80,10 @@ const ProductList = () => {
                 <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
                 <div className="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
                   <label
-                    htmlFor="file-upload"
                     className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 hover:text-blue-500"
                   >
                     <span>{image ? image.name : "Upload an Image"}</span>
-                    <input id="file-upload" name="iamge" type="file" accept="image/*" className="sr-only" onChange={uploadFileHandler}/>
+                    <input id="file-upload" name="image" type="file" accept="image/*" onChange={uploadFileHandler} className={!image ? "hidden" : "text-black"}/>
                   </label>
                 </div>
                 <p className="text-xs leading-5 text-gray-600">PNG, JPG or WEBP</p>
@@ -87,7 +101,7 @@ const ProductList = () => {
 
         <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
           <div className="sm:col-span-3">
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Product Name
             </label>
             <div className="mt-2">
@@ -102,7 +116,7 @@ const ProductList = () => {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="brand" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Brand
             </label>
             <div className="mt-2">
@@ -117,7 +131,7 @@ const ProductList = () => {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Price
             </label>
             <div className="mt-2">
@@ -132,7 +146,7 @@ const ProductList = () => {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="quantity" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Quantity
             </label>
             <div className="mt-2">
@@ -147,7 +161,7 @@ const ProductList = () => {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="category" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Category
             </label>
             <div className="mt-2">
@@ -155,14 +169,14 @@ const ProductList = () => {
                 name="category"
                 onChange={e => setCategory(e.target.value)}
                 className="block w-full rounded-md border-0 pl-2 pr-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
-              >{categories.map((category) => (
+              >{categories?.map((category) => (
                 <option key={category._id} value={category._id}>{category.name}</option>
               ))}</select>
             </div>
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="Instock" className="block text-sm font-medium leading-6 text-gray-900">
+            <label className="block text-sm font-medium leading-6 text-gray-900">
               Amount In Stock
             </label>
             <div className="mt-2">
@@ -174,10 +188,11 @@ const ProductList = () => {
                 className="block w-full rounded-md border-0 pl-3 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
               />
             </div>
+            
           </div>
 
           <div className="col-span-full">
-              <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
                 Description & Features
               </label>
               <div className="mt-2">
@@ -188,9 +203,13 @@ const ProductList = () => {
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   className="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                  defaultValue={''}
                 />
               </div>
+              <button
+              onClick={handleSubmit}
+              className="flex w-full justify-center mt-5 rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700">
+              Submit 
+            </button>
             </div>
         </div>
       </div>
