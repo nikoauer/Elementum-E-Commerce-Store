@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,15 +13,14 @@ const ProductList = () => {
     const [image, setImage] = useState('')
     const [name, setName] = useState('')
     const [brand, setBrand] = useState('')
-    const [imageURL, setImageURL] = useState('')
-    const [stock, setStock] = useState('')
+    const [CountInStock, setCountInStock] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('')
-    const [qauntity, setQuantity] = useState('')
+    const [quantity, setQuantity] = useState('')
     const navigate = useNavigate()
 
-    const [uploadProductImage] = useUploadProductImageMutation()
+    const [ uploadProductImage ] = useUploadProductImageMutation()
     const [ createProduct ] = useCreateProductMutation()
     const {data: categories} = useFetchallCategoriesQuery()
 
@@ -35,14 +33,40 @@ const ProductList = () => {
         const response = await uploadProductImage(formData).unwrap()
         toast.success(response.message, {position: "top-center"})
         setImage(response.image)
-        setImageURL(response.image)
       } catch (error) {
         toast.error(error?.data?.message || error.error, {position: "top-center"})
       }
     }
 
-    const handleSubmit = () => {
+    const handleSubmitProduct = async (event) => {
+      event.preventDefault()
 
+      try {
+        const productData = {
+          image,
+          name,
+          brand,
+          quantity,
+          category,
+          description,
+          price,
+          CountInStock,
+        };
+
+        console.log(productData)
+        const {data} = await createProduct(productData)
+
+        if(data.error) {
+          toast.error("Your product submission failed, try again please", {position: "top-center"})
+        } else {
+          toast.success(`${data.name} has successfuly been created`, {position: "top-center"})
+          navigate("/")
+        }
+
+      } catch (error) {
+        console.error(error)
+        toast.error("Your product submission failed, try again please", {position: "top-center"})
+      }
     }
 
   return(
@@ -59,7 +83,7 @@ const ProductList = () => {
           </div>
         </div>
         
-    <form>
+    <form onSubmit={handleSubmitProduct}>
     <div className="space-y-12">
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
         <div>
@@ -153,7 +177,7 @@ const ProductList = () => {
               <input
                 type="number"
                 name="quantity"
-                value={qauntity}
+                value={quantity}
                 onChange={e => setQuantity(e.target.value)}
                 className="block w-full rounded-md border-0 pl-3 py-1.5 pr-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
               />
@@ -183,8 +207,8 @@ const ProductList = () => {
               <input
                 type="number"
                 name="Instock"
-                value={stock}
-                onChange={e => setStock(e.target.value)}
+                value={CountInStock}
+                onChange={e => setCountInStock(e.target.value)}
                 className="block w-full rounded-md border-0 pl-3 py-1.5 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -206,7 +230,7 @@ const ProductList = () => {
                 />
               </div>
               <button
-              onClick={handleSubmit}
+              onClick={handleSubmitProduct}
               className="flex w-full justify-center mt-5 rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700">
               Submit 
             </button>
