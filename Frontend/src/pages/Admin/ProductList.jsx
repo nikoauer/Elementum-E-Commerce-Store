@@ -7,6 +7,8 @@ import {
 import { useFetchallCategoriesQuery } from "../../redux/api/categoryAPISlice";
 import { toast } from "react-toastify";
 import { PhotoIcon } from '@heroicons/react/24/solid'
+import AdminNav from "./AdminNav";
+
 
 const ProductList = () => {
 
@@ -72,6 +74,9 @@ const ProductList = () => {
   return(
     <div className="flex items-center justify-center mt-5">
     <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
+      <div className="flex justify-end">
+        <AdminNav />
+      </div>
     <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto mb-8">
             <h1 className="font-semibold leading-6 text-gray-900 text-2xl pb-5">
