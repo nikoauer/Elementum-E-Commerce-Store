@@ -7,9 +7,7 @@ import {   useGetUserQuery,
     useUpdateUserMutation} from "../../redux/api/usersAPISlice"
 import Message from "../../components/Message";
 import { FaRegEdit, FaCheck, FaTimes, FaTrashAlt } from 'react-icons/fa';
-
-
-
+import AdminNav from "./AdminNav";
 
 const UserList = () => {
     const { data: users, refetch, isLoading, error } = useGetUserQuery()
@@ -58,8 +56,11 @@ const UserList = () => {
       };
 
     return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center mt-1">
     <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
+    <div className="flex justify-end">
+        <AdminNav />
+      </div>
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="pt-5 pb-5 font-semibold leading-6 text-gray-900 text-2xl">Users</h1>

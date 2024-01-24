@@ -72,7 +72,7 @@ const ProductList = () => {
     }
 
   return(
-    <div className="flex items-center justify-center mt-5">
+    <div className="flex items-center justify-center mt-1">
     <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
       <div className="flex justify-end">
         <AdminNav />

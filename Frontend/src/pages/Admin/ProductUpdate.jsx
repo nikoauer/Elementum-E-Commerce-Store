@@ -39,8 +39,9 @@ const ProductUpdate = () => {
     }, [productData])
 
   return (
-    <div>ProductUpdate</div>
-  )
+      <div>
+      </div>
+        )
 }
 
 export default ProductUpdate
