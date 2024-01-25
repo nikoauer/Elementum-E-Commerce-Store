@@ -33,7 +33,7 @@ const AllProducts = () => {
       </div>
       <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
-        <li key={product.email} className="col-span-1 divide-gray-200 rounded-lg bg-white shadow">
+        <li key={product._id} className="col-span-1 divide-gray-200 rounded-lg bg-white shadow">
           <div className="flex w-full items-center justify-between space-x-6 p-6">
             <div className="flex-1 truncate">
               <div className="flex items-center space-x-4">
