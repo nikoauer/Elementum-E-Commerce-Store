@@ -43,7 +43,7 @@ const AllProducts = () => {
               <p className="mt-1 truncate text-xs text-gray-600">{moment(product.createdAt).format("MMMM Do YYYY")}</p>
             </div>
             <h3>${product.price}</h3>
-            <img src={product.image} className="w-[10rem] object-cover" />
+            <img src={product.image} className="object-cover" />
           </div>
           <p className="px-6 text-sm pb-2 text-gray-700">{product?.description?.substring(0, 160)}...</p>
           <div className="border-t-black">
