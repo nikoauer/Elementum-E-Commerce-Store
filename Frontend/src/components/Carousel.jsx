@@ -1,27 +1,32 @@
-import { useGetTopProductsQuery } from "../redux/api/productAPISlice"
-import Loader from "./Loader"
+import priceMatch from "../images/priceMatchSlider.png"
+import salewaSlider from "../images/salewaSlider.png"
+import freeShipping from "../images/freeShippingSlider.png"
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
-const Header = () => {
+const Carousel = () => {
 
-    const {data, isLoading, error} = useGetTopProductsQuery
-    console.log(data)
-
-    if (isLoading) {
-       return <Loader />
-    }
-
-    if (error) {
-        return <h1>ERROR!</h1>
-    }
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+    };
 
   return (
-
-    <div className="flex items-center justify-center mt-1">
-    <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
-       
-    </div>
-    </div>
+    <div>
+        <Slider {...settings}>
+          <img src={salewaSlider} alt="New Salew in stock" />
+          <img src={priceMatch} alt="Price match competitors" />
+          <img src={freeShipping} alt="Free shipping for a limited time" />
+        </Slider>
+      </div>
   )
 }
 
-export default Header
+export default Carousel

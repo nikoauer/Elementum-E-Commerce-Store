@@ -9,7 +9,6 @@ const Home = () => {
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
   return (
     <>
-      {!keyword ? <Carousel /> : null}
       {isLoading ? (
         <Loader />
       ) : isError ? (
@@ -19,7 +18,9 @@ const Home = () => {
       ) : (
         <>
           <div className="flex items-center justify-center mt-1">
-            <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl"></div>
+            <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
+                <Carousel />
+            </div>
           </div>
         </>
       )}
