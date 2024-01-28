@@ -20,7 +20,7 @@ import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
 
-import Home from "./Home.jsx";
+import Home from "./pages/Home.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
