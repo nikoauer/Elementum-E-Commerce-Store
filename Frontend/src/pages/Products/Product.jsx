@@ -12,6 +12,7 @@ const Product = ({ product }) => {
                   className="h-full w-full object-cover object-center"
                 />
               </div>
+              <div className='sm:flex sm:items-baseline sm:justify-between'>
               <h3 className="mt-4 text-base font-semibold text-gray-900">
                 <Link to={`/product/${product._id}`}>
                   <span className="absolute inset-0" />
@@ -20,6 +21,7 @@ const Product = ({ product }) => {
               </h3>
               <p className="mt-1 text-sm text-gray-500">${product.price}</p>
             </div>
+        </div>
   )
 }
 
