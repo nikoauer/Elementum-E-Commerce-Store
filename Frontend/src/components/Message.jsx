@@ -1,5 +1,3 @@
-
-
 const Message = ({ variant, children}) => {
     const getVariantClass = () => {
         switch(variant) {
