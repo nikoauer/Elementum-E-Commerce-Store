@@ -6,7 +6,7 @@ const favouriteSlice = createSlice({
     initialState: [],
     reducers: {
         addtoFavourites: (state, action) => {
-            if(!state.some(product) => product._id === action.payload._id) {
+            if(!state.some((product) => product._id === action.payload._id)) {
                 state.push(action.payload)
             }
         },
@@ -19,7 +19,7 @@ const favouriteSlice = createSlice({
     }
 })
 
-export const {addtoFavourites, removefromFavourites, setFavourites} = favouriteSlice.action
+export const {addtoFavourites, removefromFavourites, setFavourites} = favouriteSlice.actions
 
 export const selectFavouriteProduct = (state) => state.favouriteSlice
 
