@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import {HeartIcon} from "@heroicons/react/24/outline";
+import FavouritesIcon from './FavouritesIcon';
 
 const Product = ({ product }) => {
   return (
-<div key={product._id} className="group relative mb-10">
+    <>
+    <FavouritesIcon className='h-6 w-6' product={product}/>
+      <div key={product._id} className="group relative mb-10">
               <div className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto">
-              <HeartIcon className='h-6 w-6' product={product}/>
                 <img
                   src={product.image}
                   alt={product.name}
@@ -23,6 +24,7 @@ const Product = ({ product }) => {
               <p className="mt-1 text-sm text-gray-500">${product.price}</p>
             </div>
         </div>
+    </>
         
   )
 }

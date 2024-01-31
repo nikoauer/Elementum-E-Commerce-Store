@@ -6,7 +6,6 @@ import Carousel from "../components/Carousel";
 import Banner from "../images/Banner.png";
 import Product from "./Products/Product";
 import { FaArrowRight } from "react-icons/fa";
-import {HeartIcon} from "@heroicons/react/24/outline";
 
 const Home = () => {
   const { keyword } = useParams();
