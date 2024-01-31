@@ -34,7 +34,7 @@ const FavouritesIcon = ({ product }) => {
   };
 
   return (
-    <div onClick={toggleFavourites} className="abolsute cursor-pointer">
+    <div onClick={toggleFavourites} style={{ zIndex: 2 }}  className="relative cursor-pointer top-2">
       {isFavourites ? (
         <IoHeartSharp className="h-6 w-6 text-red-600" />
       ) : (
