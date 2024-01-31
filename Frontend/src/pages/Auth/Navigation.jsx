@@ -21,6 +21,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersAPISlice";
 import { logout } from "../../redux/features/auth/authSlice";
+import FavouriteCounter from "../Products/FavouriteCounter"
 
 export default function Navigation() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -92,6 +93,7 @@ export default function Navigation() {
                     className="mx-3 relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <HeartIcon className="h-6 w-6" aria-hidden="true" />
+                    <FavouriteCounter/>
                   </Link>
                   <Link
                     to="/cart"
