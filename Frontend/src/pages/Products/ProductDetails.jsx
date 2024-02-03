@@ -61,6 +61,10 @@ const ProductDetails = () => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const addToCartHandler = () => {
+
+  }
+
   return (
     <>
       <div className="flex items-center justify-center mt-1">
@@ -88,7 +92,6 @@ const ProductDetails = () => {
                   alt={product.name}
                   className="h-full object-contain w-full rounded-md"
                 />
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, in culpa hic dicta quibusdam atque dolore, quod quo et porro dolores nostrum blanditiis ratione, temporibus sunt animi aut dolorem voluptas.</p>
                 </div>
 
                 <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-10">
@@ -115,9 +118,28 @@ const ProductDetails = () => {
                       className="space-y-6 text-base text-gray-700"
                       dangerouslySetInnerHTML={{ __html: product.description }}
                     />
-                    <div className="mt-10 flex">
+                  <div className="mt-5">
+                    {product.CountInStock > 0 && (
+                  <div>
+                    <select
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                      className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100"
+                    >
+                      {[...Array(product.CountInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                </div>
+                    <div className="mt-5 flex">
                       <button
                         type="submit"
+                        onClick={addToCartHandler}
+                        disabled={product.CountInStock === 0}
                         className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-3 text-base font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                       >
                         Add to cart
