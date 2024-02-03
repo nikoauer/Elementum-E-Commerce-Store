@@ -14,15 +14,9 @@ import moment from "moment";
 import FavouritesIcon from "./FavouritesIcon";
 import {
   HeartIcon,
-  MinusIcon,
-  PlusIcon,
   TagIcon,
 } from "@heroicons/react/24/outline";
-import { Disclosure } from '@headlessui/react'
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+import Ratings from "../../components/Ratings";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -67,7 +61,7 @@ const ProductDetails = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover object-center rounded-md"
+                  className="h-full object-contain w-full rounded-md"
                 />
                 <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-10">
                   <h1 className="text-3xl font-bold tracking-tight text-gray-900">
@@ -81,6 +75,9 @@ const ProductDetails = () => {
                     <p className="text-3xl tracking-tight text-gray-900">
                       ${product.price}
                     </p>
+                  </div>
+                  <div className="mt-2">
+                  <Ratings value={product.rating} text={`${product.numReviews} reviews`}/>
                   </div>
                   <div className="mt-6">
                     <div
@@ -103,7 +100,6 @@ const ProductDetails = () => {
                   <span className="sr-only">Add to favorites</span>
                 </button>
               </div>
-
                   </div>
                 </div>
               </div>
