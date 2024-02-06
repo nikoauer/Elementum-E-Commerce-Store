@@ -20,6 +20,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Ratings from "../../components/Ratings";
 import { Disclosure } from "@headlessui/react";
+import ProductTabs from "./ProductTabs";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -62,6 +63,10 @@ const ProductDetails = () => {
   }
 
   const addToCartHandler = () => {
+
+  }
+
+  const submitHandler = () => {
 
   }
 
@@ -205,6 +210,17 @@ const ProductDetails = () => {
             </>
           )}
         </div>
+      </div>
+      <div className="flex items-center justify-center mt-1">
+        <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
+        <ProductTabs loadingProductReview={loadingProductReview} userInfo={userInfo}
+        submitHandler={submitHandler}
+        rating={rating}
+        setRating={setRating}
+        comment={comment}
+        setComment={setComment}
+        product={product}/>
+      </div>
       </div>
     </>
   );
