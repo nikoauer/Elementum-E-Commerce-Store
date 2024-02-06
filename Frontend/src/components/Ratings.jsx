@@ -16,7 +16,7 @@ const Ratings = ({ value, text, colour }) => {
         <FaRegStar key={index} className={`text-${colour} ml-1`} />
       ))}
 
-      {text && <span className={`rating-text ml-2 text-${colour}`}>{text}</span>}
+      {text && <span className={`rating-text ml-2 text-gray-800`}>{text}</span>}
     </div>
   );
 };
