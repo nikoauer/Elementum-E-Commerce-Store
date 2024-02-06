@@ -66,8 +66,18 @@ const ProductDetails = () => {
 
   }
 
-  const submitHandler = () => {
+  const submitHandler = async(event) => {
+    event.preventDefault()
 
+    try {
+      await createReview({
+        productId,rating,comment
+      }).unwrap()
+      refetch()
+      toast.success("Review successfully added", {position: "top-center"})
+    } catch (error) {
+      toast.error(error?.data?.message || error.message, {position: "top-center"})
+    }
   }
 
   return (
