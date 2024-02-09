@@ -68,7 +68,7 @@ const ProductTabs = ({loadingProductReview, userInfo, submitHandler, rating, set
                         
                         <ul role="list" className="divide-y divide-gray-100">
                         {product && product.reviews && product.reviews.map((review) => (
-                                <li key={comment.id} className="flex gap-x-4 py-5">
+                                <li key={review._id} className="flex gap-x-4 py-5">
                                     <div className="flex-auto">
                                     <div className="flex items-baseline justify-between gap-x-4">
                                     <p className="text-sm font-semibold leading-6 text-gray-900">{review.name}</p>
