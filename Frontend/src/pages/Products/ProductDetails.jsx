@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   useGetProductDetailsQuery,
@@ -19,13 +19,14 @@ import {
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import Ratings from "../../components/Ratings";
 import { Disclosure } from "@headlessui/react";
 import ProductTabs from "./ProductTabs";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -64,7 +65,8 @@ const ProductDetails = () => {
   }
 
   const addToCartHandler = () => {
-
+    dispatch(addToCart({...product, qty}))
+    navigate('/cart')
   }
 
   const submitHandler = async(event) => {
