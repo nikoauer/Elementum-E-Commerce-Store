@@ -26,6 +26,8 @@ import FavouriteCounter from "../Products/FavouriteCounter"
 export default function Navigation() {
   const { userInfo } = useSelector((state) => state.auth);
 
+  const {cartItems} = useSelector((state) => state.cart)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -102,6 +104,13 @@ export default function Navigation() {
                     className="mr-5 relative rounded-full bg-white p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                    <div>
+                      {cartItems.length > 0 && (
+                        <span className="absolute bottom-4 left-5">
+                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + c.qty, 0)}</span>
+                        </span>
+                      )}
+                    </div>
                   </Link>
                   {userInfo ? (
                     <Menu as="div" className="relative inline-block text-left">
@@ -293,7 +302,7 @@ export default function Navigation() {
                 <div className="flex items-center">
                   <HeartIcon className="h-6 w-6" />
                   <span className="ml-2">Favourites</span>
-                  <div className='absolute left-32'>
+                  <div className='absolute left-36'>
                     <FavouriteCounter/>
                   </div>
                 </div>
@@ -306,6 +315,11 @@ export default function Navigation() {
                 <div className="flex items-center">
                   <ShoppingCartIcon className="h-6 w-6" />
                   <span className="ml-2">Cart</span>
+                  {cartItems.length > 0 && (
+                        <span className="absolute left-24">
+                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + c.qty, 0)}</span>
+                        </span>
+                      )}
                 </div>
               </NavLink>
               {/* Seperating line in menu */}
