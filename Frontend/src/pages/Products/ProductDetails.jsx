@@ -9,7 +9,8 @@ import {
 } from "../../redux/api/productAPISlice";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft,  } from "react-icons/fa";
+import { MdReviews } from "react-icons/md";
 import moment from "moment";
 import FavouritesIcon from "./FavouritesIcon";
 import {
@@ -76,7 +77,7 @@ const ProductDetails = () => {
       refetch()
       toast.success("Review successfully added", {position: "top-center"})
     } catch (error) {
-      toast.error(error?.data?.message || error.message, {position: "top-center"})
+      toast.error(error?.data || error.message, {position: "top-center"})
     }
   }
 
@@ -122,13 +123,11 @@ const ProductDetails = () => {
                       ${product.price}
                     </p>
                   </div>
-                  <div className="mt-2">
-                    <Ratings
-                      value={product.rating}
-                      text={`${product.numReviews} reviews`}
-                    />
+                  <div className="mt-2 flex items-center align-">
+                    <MdReviews className="h-6 w-6" /> 
+                    <span className="ml-2">{product.numReviews === 1 ? (`${product.numReviews} review`) : (`${product.numReviews} reviews`)}</span>
                   </div>
-                  <div className="mt-6">
+                  <div className="mt-4">
                     <div
                       className="space-y-6 text-base text-gray-700"
                       dangerouslySetInnerHTML={{ __html: product.description }}
