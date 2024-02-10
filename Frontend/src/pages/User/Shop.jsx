@@ -22,39 +22,51 @@ const Shop = () => {
   });
 
   useEffect(() => {
-    if(!categoriesQuery.isLoading) {
-      dispatch(setCategories(categoriesQuery.data))
+    if (!categoriesQuery.isLoading) {
+      dispatch(setCategories(categoriesQuery.data));
     }
-  }, [categoriesQuery.data, dispatch])
+  }, [categoriesQuery.data, dispatch]);
 
   useEffect(() => {
-    if(!checked.length || !radio.length) {
-      if(!getFilteredProducts.isLoading) {
+    if (!checked.length || !radio.length) {
+      if (!getFilteredProducts.isLoading) {
         const filteredProducts = getFilteredProducts.data.filter((product) => {
           return (
-            product.price.toString().includes(priceFilter) || product.price === parseInt(priceFilter, 10)
-          )
-        }
-        )
-        dispatch(setProducts(filteredProducts))
+            product.price.toString().includes(priceFilter) ||
+            product.price === parseInt(priceFilter, 10)
+          );
+        });
+        dispatch(setProducts(filteredProducts));
       }
     }
-  })
-
+  });
 
   const handleBrand = (brand) => {
     const productsByBrand = getFilteredProducts.data?.filter(
       (product) => product.brand === brand
-    )
-    dispatch(setProducts(productsByBrand))
-  }
+    );
+    dispatch(setProducts(productsByBrand));
+  };
 
   const handleCheck = (value, id) => {
-    const updatedCheck = value ? [...checked, id] : checked.filter((c) => c !== id)
-    dispatch(setChecked(updatedCheck))
-  }
+    const updatedCheck = value
+      ? [...checked, id]
+      : checked.filter((c) => c !== id);
+    dispatch(setChecked(updatedCheck));
+  };
 
-  const 
+  const uniqueBrands = [
+    ...Array.from(
+      new Set(
+        getFilteredProducts.data
+          ?.map((product) => product.brand)
+          .filter((brand) => brand !== undefined)
+      )
+    ),
+  ];
+  const handlePriceChange = e => {
+    setPriceFilter(e.target.value)
+  }
 
   return <div>Shop</div>;
 };
