@@ -400,7 +400,7 @@ const Shop = () => {
                 </form>
               </div>
 
-              <div className="relative">
+              <div className="hidden lg:block">
                 <div className="w-full border-t border-gray-200 my-8" />
               </div>
 
@@ -434,7 +434,7 @@ const Shop = () => {
                 </form>
               </div>
 
-              <div className="relative">
+              <div className="hidden lg:block">
                 <div className="w-full border-t border-gray-200 my-8" />
               </div>
 
@@ -455,11 +455,11 @@ const Shop = () => {
                 </form>
               </div>
 
-              <div className="relative">
+              <div className="hidden lg:block">
                 <div className="w-full border-t border-gray-200 my-8" />
               </div>
 
-              <div>
+              <div className="hidden lg:block">
                     <button
                       className="w-full rounded-md bg-sky-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                       onClick={() => window.location.reload()}
