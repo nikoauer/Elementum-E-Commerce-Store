@@ -87,7 +87,7 @@ const ProductDetails = () => {
     <>
       <div className="flex items-center justify-center mt-1">
         <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
-          <Link to="/">
+          <Link to="/shop">
             <button
               type="button"
               className="rounded-full bg-sky-600 p-1 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
