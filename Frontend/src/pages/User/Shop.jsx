@@ -189,7 +189,7 @@ const Shop = () => {
                           <legend className="w-full px-2">
                             <Disclosure.Button className="flex w-full items-center justify-between p-2 text-gray-400 hover:text-gray-500">
                               <span className="text-sm font-medium text-gray-900">
-                                Categories
+                                Category
                               </span>
                               <span className="ml-6 flex h-7 items-center">
                                 <ChevronDownIcon
@@ -219,7 +219,7 @@ const Shop = () => {
                                       )
                                     }
                                     type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                                   />
                                   <label
                                     htmlFor={category.name}
@@ -268,7 +268,7 @@ const Shop = () => {
                                     name="brand"
                                     onChange={() => handleBrand(brand)}
                                     type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                                   />
                                   <label
                                     htmlFor={brand}
@@ -368,44 +368,78 @@ const Shop = () => {
                 />
               </button>
 
+              {/* desktop categories */}
               <div className="hidden lg:block">
                 <form className="space-y-10 divide-y divide-gray-200">
-                  {filters.map((section, sectionIdx) => (
-                    <div
-                      key={section.name}
-                      className={sectionIdx === 0 ? null : "pt-10"}
-                    >
-                      <fieldset>
-                        <legend className="block text-sm font-medium text-gray-900">
-                          {section.name}
-                        </legend>
-                        <div className="space-y-3 pt-6">
-                          {section.options.map((option, optionIdx) => (
-                            <div
-                              key={option.value}
-                              className="flex items-center"
-                            >
-                              <input
-                                id={`${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                defaultValue={option.value}
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                              />
-                              <label
-                                htmlFor={`${section.id}-${optionIdx}`}
-                                className="ml-3 text-sm text-gray-600"
-                              >
-                                {option.label}
-                              </label>
-                            </div>
-                          ))}
+                  <fieldset>
+                    <legend className="block text-sm font-medium text-gray-900">
+                      Category
+                    </legend>
+                    <div className="space-y-3 pt-6">
+                      {categories.map((category) => (
+                        <div key={category._id} className="flex items-center">
+                          <input
+                            id={category._id}
+                            name={category.name}
+                            onChange={(e) =>
+                              handleCheck(e.target.checked, category._id)
+                            }
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                          />
+                          <label
+                            htmlFor={category.name}
+                            className="ml-3 text-sm text-gray-600"
+                          >
+                            {category.name}
+                          </label>
                         </div>
-                      </fieldset>
+                      ))}
                     </div>
-                  ))}
+                  </fieldset>
                 </form>
               </div>
+
+              <div className="relative">
+                  <div className="w-full border-t border-gray-200 my-8" />
+              </div>
+
+              {/* desktop brands */}
+              <div className="hidden lg:block">
+                <form className="space-y-10 divide-y divide-gray-200">
+                  <fieldset>
+                    <legend className="block text-sm font-medium text-gray-900">
+                      Brands
+                    </legend>
+                    <div className="space-y-3 pt-6">
+                      {uniqueBrands.map((brand) => (
+                        <div key={brand} className="flex items-center">
+                          <input
+                            id={brand}
+                            name={brand}
+                            onChange={() => handleBrand(brand)}
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                          />
+                          <label
+                            htmlFor={brand}
+                            className="ml-3 text-sm text-gray-600"
+                          >
+                            {brand}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+
+              <div className="relative">
+                  <div className="w-full border-t border-gray-200 my-8" />
+              </div>
+              
+              
+
             </aside>
 
             {/* Product grid */}
