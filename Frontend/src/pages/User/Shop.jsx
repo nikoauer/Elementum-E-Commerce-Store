@@ -12,6 +12,7 @@ import { useFetchallCategoriesQuery } from "../../redux/api/categoryAPISlice";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
+import ProductCard from "../Products/ProductCard";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -288,18 +289,17 @@ const Shop = () => {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <main className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
           <div className="border-b border-gray-200 pb-10">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               New Arrivals
             </h1>
             <p className="mt-4 text-base text-gray-500">
-              Checkout out the latest release of Basic Tees, new and improved
-              with four openings!
+              Checkout out the latest camping gear
             </p>
           </div>
 
-          <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
+          <div className="pt-10 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
             <aside>
               <h2 className="sr-only">Filters</h2>
 
@@ -416,12 +416,25 @@ const Shop = () => {
                       Reset
                     </button>
                   </div>
-
             </aside>
-
+            
             {/* Product grid */}
             <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
-              {/* Your content */}
+              <div className="hidden lg:block">
+                <div className="flex justify-end">
+                <h2 className="text-gray-700">{products?.length} Products</h2>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-3 xl:gap-x-8">
+                {products.length === 0 ? (
+                  <Loader/>
+                ) : ( products?.map((product) => (
+                  <div key={product._id}>
+                    <ProductCard product={product}/>
+                  </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </main>
