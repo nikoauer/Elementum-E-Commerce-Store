@@ -422,7 +422,7 @@ const Shop = () => {
             <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
               <div className="hidden lg:block">
                 <div className="flex justify-end">
-                <h2 className="text-gray-700">{products?.length} Products</h2>
+                <h2 className="text-gray-700 pb-5">{products?.length} Products</h2>
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-3 xl:gap-x-8">
