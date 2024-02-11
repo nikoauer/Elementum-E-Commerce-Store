@@ -324,7 +324,7 @@ const Shop = () => {
                       )}
                     </Disclosure>
                   </form>
-
+                  {/* Reset Button */}
                   <div className="p-5">
                     <button
                       className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
@@ -401,7 +401,7 @@ const Shop = () => {
               </div>
 
               <div className="relative">
-                  <div className="w-full border-t border-gray-200 my-8" />
+                <div className="w-full border-t border-gray-200 my-8" />
               </div>
 
               {/* desktop brands */}
@@ -435,10 +435,38 @@ const Shop = () => {
               </div>
 
               <div className="relative">
-                  <div className="w-full border-t border-gray-200 my-8" />
+                <div className="w-full border-t border-gray-200 my-8" />
               </div>
-              
-              
+
+              <div className="hidden lg:block">
+                <form className="space-y-6">
+                  <legend className="block text-sm font-medium text-gray-900">
+                    Price
+                  </legend>
+                  <div className="space-y-5">
+                    <input
+                      type="text"
+                      placeholder="Enter Price"
+                      value={priceFilter}
+                      onChange={handlePriceChange}
+                      className="w-full px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring focus:border-sky-500"
+                    />
+                  </div>
+                </form>
+              </div>
+
+              <div className="relative">
+                <div className="w-full border-t border-gray-200 my-8" />
+              </div>
+
+              <div>
+                    <button
+                      className="w-full rounded-md bg-sky-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                      onClick={() => window.location.reload()}
+                    >
+                      Reset
+                    </button>
+                  </div>
 
             </aside>
 
