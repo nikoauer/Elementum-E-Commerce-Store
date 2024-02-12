@@ -5,9 +5,11 @@ import FavouritesIcon from './FavouritesIcon';
 const Product = ({ product }) => {
   return (
     <>
-    <FavouritesIcon className='h-6 w-6' product={product}/>
+    <div className='relative top-6 left-2'>
+      <FavouritesIcon className='h-6 w-6' product={product}/>
+    </div>
       <div key={product._id} className="group relative mb-10">
-              <div className="h-96 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto">
+              <div className="h-96 w-full overflow-hidden sm:aspect-h-3 sm:aspect-w-2 group-hover:opacity-75 sm:h-auto rounded-md border border-gray-200">
                 <img
                   src={product.image}
                   alt={product.name}
