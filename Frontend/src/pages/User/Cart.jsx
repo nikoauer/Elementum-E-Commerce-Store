@@ -120,18 +120,10 @@ const Cart = () => {
                     <dd className="font-medium text-gray-900">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</dd>
                   </div>
                   <div className="flex items-center justify-between py-4">
-                    <dt className="text-gray-600">Subtotal</dt>
-                    <dd className="font-medium text-gray-900">{cartItems
+                    <dt className="text-gray-900 text-base font-medium">Order total</dt>
+                    <dd className="text-base font-medium text-gray-900">${cartItems
                       .reduce((acc, item) => acc + item.qty * item.price, 0)
                       .toFixed(2)}</dd>
-                  </div>
-                  <div className="flex items-center justify-between py-4">
-                    <dt className="text-gray-600">Tax</dt>
-                    <dd className="font-medium text-gray-900">$8.32</dd>
-                  </div>
-                  <div className="flex items-center justify-between py-4">
-                    <dt className="text-base font-medium text-gray-900">Order total</dt>
-                    <dd className="text-base font-medium text-gray-900">$112.32</dd>
                   </div>
                 </dl>
               </div>
