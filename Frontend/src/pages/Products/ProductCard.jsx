@@ -33,7 +33,10 @@ const ProductCard = ({product}) => {
                   </h3>
                   <p className="mt-1 italic text-sm text-gray-500">{product.brand}</p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">${product.price}</p>
+                <p className="text-sm font-medium text-gray-900"> {product?.price?.toLocaleString("en-AU", {
+              style: "currency",
+              currency: "AUD",
+            })}</p>
               </div>
             </div>
             </Link>

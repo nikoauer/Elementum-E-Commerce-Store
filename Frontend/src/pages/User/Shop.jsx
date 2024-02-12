@@ -161,7 +161,7 @@ const Shop = () => {
                                 >
                                   <input
                                     id={category._id}
-                                    name={category.name}
+                                    name='category'
                                     onChange={(e) =>
                                       handleCheck(
                                         e.target.checked,
@@ -172,7 +172,7 @@ const Shop = () => {
                                     className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                                   />
                                   <label
-                                    htmlFor={category.name}
+                                    htmlFor={category._id}
                                     className="ml-3 text-sm text-gray-500"
                                   >
                                     {category.name}
@@ -329,7 +329,7 @@ const Shop = () => {
                         <div key={category._id} className="flex items-center">
                           <input
                             id={category._id}
-                            name={category.name}
+                            name="category"
                             onChange={(e) =>
                               handleCheck(e.target.checked, category._id)
                             }
@@ -337,7 +337,7 @@ const Shop = () => {
                             className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                           />
                           <label
-                            htmlFor={category.name}
+                            htmlFor={category._id}
                             className="ml-3 text-sm text-gray-600"
                           >
                             {category.name}
@@ -365,7 +365,7 @@ const Shop = () => {
                         <div key={brand} className="flex items-center">
                           <input
                             id={brand}
-                            name={brand}
+                            name="brand"
                             onChange={() => handleBrand(brand)}
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
