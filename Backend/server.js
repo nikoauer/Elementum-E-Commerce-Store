@@ -27,6 +27,10 @@ connectDB().then(() => {
   console.error('Failed to connect to the database:', error);
 });
 
+app.get('/api/config/paypal', (req, res) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID})
+})
+
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
