@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { authAdmin, authenticateUser } from "../middlewares/authMiddleware.js";
-import { createOrder, markOrderAsPaid, getAllOrders, getUserOrder, countTotalOrders, calculateTotalSalesByDate, findOrderById, calculateTotalSales } from "../controllers/orderControllers.js";
+import { createOrder, markOrderAsPaid, markOrderAsDelivered, getAllOrders, getUserOrder, countTotalOrders, calculateTotalSalesByDate, findOrderById, calculateTotalSales } from "../controllers/orderControllers.js";
 
 router
   .route("/")
@@ -14,5 +14,6 @@ router.route('/total-sales').get(calculateTotalSales)
 router.route('/total-sales-by-date').get(calculateTotalSalesByDate)
 router.route('/:id').get(authenticateUser, findOrderById)
 router.route('/:id/pay').put(authenticateUser, markOrderAsPaid)
+router.route('/:id/delivery').put(authenticateUser, authAdmin, markOrderAsDelivered)
 
 export default router;
