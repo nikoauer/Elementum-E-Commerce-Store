@@ -11,7 +11,11 @@ const ProductCard = ({product}) => {
     const dispatch = useDispatch()
 
   return (
-    <div><Link to={`/product/${product._id}`}>
+    <div>
+        <div className="relative top-6 left-2">
+            <FavouritesIcon product={product}/>
+        </div>
+        <Link to={`/product/${product._id}`}>
             <div className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-white lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
