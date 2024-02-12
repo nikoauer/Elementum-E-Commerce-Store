@@ -1,22 +1,7 @@
+import asyncHandler from "../middlewares/asyncHandler.js";
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js";
-
-function calculatePrices(orderItems) {
-    const itemsPrice = orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    const shippingPrice = itemsPrice > 80 ? 0 : 10;
-    const taxRate = 0.10
-    const taxPrice = (itemsPrice * taxRate).toFixed(2)
-
-    const totalPrice = (
-        itemsPrice + shippingPrice + parseFloat(taxPrice).toFixed(1)
-    )
-    return {
-        itemsPrice: itemsPrice.toFixed(2), 
-        shippingPrice: shippingPrice.toFixed(2),
-        taxPrice,
-        totalPrice,
-    }
-}
+import calculatePrices from "../utils/calculatePrice.js";
 
 const createOrder = async(req, res) => {
     try {
@@ -67,4 +52,22 @@ const createOrder = async(req, res) => {
     }
 }
 
-export {createOrder}
+const getAllOrders = async(req, res) => {
+    try {
+        const orders = await Order.find({}).populate('user', 'id username')
+        res.json(orders)
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
+
+const getUserOrder = async(req, res) => {
+    try {
+        const orders = await Order.find({user: req.user._id})
+        res.json(orders)
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
+
+export {createOrder, getAllOrders, getUserOrder}
