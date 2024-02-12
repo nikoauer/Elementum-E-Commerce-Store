@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/features/cart/cartSlice";
-import { toast } from "react-toastify";
 import FavouritesIcon from "./FavouritesIcon";
 
 const ProductCard = ({product}) => {
@@ -33,10 +30,7 @@ const ProductCard = ({product}) => {
                   </h3>
                   <p className="mt-1 italic text-sm text-gray-500">{product.brand}</p>
                 </div>
-                <p className="text-sm font-medium text-gray-900"> {product?.price?.toLocaleString("en-AU", {
-              style: "currency",
-              currency: "AUD",
-            })}</p>
+                <p className="text-sm pl-5 font-medium text-gray-900">${product.price}</p>
               </div>
             </div>
             </Link>
