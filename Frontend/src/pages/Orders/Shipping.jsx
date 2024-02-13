@@ -61,6 +61,9 @@ const Shipping = () => {
                     id="Address"
                     name="Address"
                     type="text"
+                    value={address}
+                    required
+                    onChange={(e) => setAddress(e.target.value)}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -78,7 +81,9 @@ const Shipping = () => {
                     type="text"
                     name="City"
                     id="City"
-                    autoComplete="street-address"
+                    value={city}
+                    required
+                    onChange={(e) => setCity(e.target.value)}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -96,6 +101,9 @@ const Shipping = () => {
                     type="text"
                     name="State"
                     id="State"
+                    value={state}
+                    required
+                    onChange={(e) => setState(e.target.value)}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -113,6 +121,9 @@ const Shipping = () => {
                     type="text"
                     name="PostalCode"
                     id="PostalCode"
+                    value={postalCode}
+                    required
+                    onChange={(e) => setPostalCode(e.target.value)}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -130,13 +141,18 @@ const Shipping = () => {
                     type="text"
                     name="Country"
                     id="Country"
+                    value={country}
+                    required
+                    onChange={(e) => setCountry(e.target.value)}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
 
               <div className="col-span-full">
-                <label htmlFor="PostalCode" className="block text-gray-900">Select Method</label>
+                <label htmlFor="PostalCode" className="block text-gray-900">
+                  Select Method
+                </label>
                 <div className="mt-2">
                   <label className="inline-flex items-center">
                     <input
@@ -151,6 +167,11 @@ const Shipping = () => {
                     <span className="ml-2">PayPal or Credit Card</span>
                   </label>
                 </div>
+              </div>
+              <div >
+                <button className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                  Submit
+                </button>
               </div>
             </div>
           </div>
