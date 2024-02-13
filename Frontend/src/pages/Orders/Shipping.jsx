@@ -27,9 +27,10 @@ useEffect(() => {
 }, [navigate, shippingAddress])
 
   return (
-    <div className="flex items-center justify-center mt-20">
+    <div className="flex items-center justify-center mt-10">
     <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
-    <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3">
+    <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-10">Shipping</h1>
+    <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3 border-b border-t border-gray-300 py-10 scroll-px-3.5">
           <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">Shipping Information</h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">Please input your shipping details</p>
@@ -106,6 +107,8 @@ useEffect(() => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
                 />
               </div>
+
+              
             </div>
           </div>
         </div>
