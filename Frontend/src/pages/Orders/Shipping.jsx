@@ -6,6 +6,7 @@ import {
   saveShippingAddress,
   savePaymentMethod,
 } from "../../redux/features/cart/cartSlice";
+import ProgressStep from "../../components/ProgressStep";
 
 const Shipping = () => {
   const cart = useSelector((state) => state.cart);
@@ -37,6 +38,7 @@ const Shipping = () => {
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-10">
           Shipping
         </h1>
+        <ProgressStep step1 step2 />
         <form onSubmit={submitHandler}>
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3 border-b border-t border-gray-300 py-10 scroll-px-3.5">
             <div>
@@ -169,7 +171,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div >
-                <button className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                <button onClick={submitHandler} className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                   Submit
                 </button>
               </div>
