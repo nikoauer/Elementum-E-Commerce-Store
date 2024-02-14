@@ -38,7 +38,9 @@ const Shipping = () => {
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-10">
           Shipping
         </h1>
-        <ProgressStep step1 step2 />
+        <div className="my-10">
+            <ProgressStep step1 step2 />
+        </div>
         <form onSubmit={submitHandler}>
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3 border-b border-t border-gray-300 py-10 scroll-px-3.5">
             <div>
