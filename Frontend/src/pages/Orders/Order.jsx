@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { PayPalButton, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Message from "../../components/Message";
@@ -57,7 +57,17 @@ const Order = () => {
   ) : error ? (
     <Message variant="danger">{error.data.message}</Message>
   ) : (
-    <div></div>
+    <div className="flex items-center justify-center mt-1">
+    <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
+        {order.orderItems.length === 0 ? (
+                <Messsage>Order is empty</Messsage>
+            ) : ( 
+                <div>
+                    <h1>hello</h1>
+                </div>
+            )}
+    </div>
+    </div> 
   );
 };
 
