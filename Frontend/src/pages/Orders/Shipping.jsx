@@ -160,7 +160,7 @@ const Shipping = () => {
               </div>
 
               <div className="col-span-full">
-                <label htmlFor="PostalCode" className="block text-gray-900">
+                <label htmlFor="PostalCode" className="block font-medium text-gray-900">
                   Select Method
                 </label>
                 <div className="mt-2">
@@ -170,6 +170,7 @@ const Shipping = () => {
                       className="form-radio h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
                       name="paymentMethod"
                       value="PayPal"
+                      required
                       checked={paymentMethod === "PayPal"}
                       onChange={(e) => setPaymentMethod(e.target.value)}
                     />
@@ -179,7 +180,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div >
-                <button onClick={submitHandler} className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                <button onSubmit={submitHandler} className="w-full rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
                   Submit
                 </button>
               </div>

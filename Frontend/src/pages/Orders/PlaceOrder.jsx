@@ -107,7 +107,7 @@ const PlaceOrder = () => {
                             <img
                               src={item.image}
                               alt={item.name}
-                              className="w-20 h-20 object-cover rounded-md"
+                              className="w-20 h-20 object-contain rounded-md"
                             />
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">

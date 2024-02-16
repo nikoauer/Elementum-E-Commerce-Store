@@ -44,7 +44,7 @@ const Cart = () => {
         </div>
         </div>
         ) : ( 
-          <form className="mt-12">
+          <form onSubmit={checkoutHandler} className="mt-12">
           <div>
             <h2 className="sr-only">Items in your shopping cart</h2>
 
@@ -133,7 +133,7 @@ const Cart = () => {
               <button
                 type="submit"
                 disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
+                onSubmit={checkoutHandler}
                 className="w-full rounded-md border border-transparent bg-sky-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Checkout
