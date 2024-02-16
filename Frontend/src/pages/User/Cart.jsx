@@ -120,7 +120,7 @@ const Cart = () => {
                     <dd className="font-medium text-gray-900">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</dd>
                   </div>
                   <div className="flex items-center justify-between py-4">
-                    <dt className="text-gray-900 text-base font-medium">Order total</dt>
+                    <dt className="text-gray-900 text-base font-medium">Subtotal</dt>
                     <dd className="text-base font-medium text-gray-900">${cartItems
                       .reduce((acc, item) => acc + item.qty * item.price, 0)
                       .toFixed(2)}</dd>
