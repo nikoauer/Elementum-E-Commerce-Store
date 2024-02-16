@@ -29,6 +29,8 @@ import Shop from "./pages/User/Shop.jsx";
 
 import Shipping from "./pages/Orders/Shipping.jsx";
 import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
+import Order from "./pages/Orders/Order.jsx";
+import {PaypalScriptProvider} from '@paypal/react-paypal-js'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +47,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/order/:id" element={<Order />} />
       </Route>
 
       {/* admin routes */}
@@ -61,6 +64,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
+    <PaypalScriptProvider>
     <RouterProvider router={router} />
+    </PaypalScriptProvider>
   </Provider>
 );
