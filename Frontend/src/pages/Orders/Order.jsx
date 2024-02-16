@@ -13,7 +13,52 @@ import {
 } from "../../redux/api/orderAPIslice";
 
 const Order = () => {
-  return <div>Order</div>;
+  const { id: orderId } = useParams();
+  const {
+    data: order,
+    refetch,
+    isLoading,
+    error,
+  } = useGetOrderDetailsQuery(orderId);
+
+  const [payOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+
+  const {
+    data: paypal,
+    isLoading: loadingPayPal,
+    error: errorPayPal,
+  } = useGetPaypalClientIdQuery();
+
+  useEffect(() => {
+    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+      const loadingPayPalScript = async () => {
+        paypalDispatch({
+          type: "resetOptions",
+          value: {
+            "client-id": paypal.clientId,
+            currency: "AUD",
+          },
+        });
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      };
+      if (order && !order.isPaid) {
+        if (!window.paypal) {
+          loadingPayPalScript();
+        }
+      }
+    }
+  }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
+
+  return isLoading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error.data.message}</Message>
+  ) : (
+    <div></div>
+  );
 };
 
 export default Order;
