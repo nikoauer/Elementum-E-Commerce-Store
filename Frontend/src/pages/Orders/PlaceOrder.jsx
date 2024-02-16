@@ -1,24 +1,44 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import ProgressSteps from "../../components/ProgressStep";
 import Loader from "../../components/Loader";
-import { useCreateProductMutation } from "../../redux/api/productAPISlice";
+import { useCreateOrderMutation } from "../../redux/api/orderAPIslice";
 import { clearCartItems } from "../../redux/features/cart/cartSlice";
+import { FaCcPaypal } from "react-icons/fa";
+
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  const [createOrder, { isLoading, error }] = useCreateProductMutation();
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
       navigate("/shipping");
     }
   }, [cart.paymentMethod, cart.shippingAddress.address, navigate]);
+
+  const placeOrderHandler = async() => {
+    try {
+        const res = await createOrder({
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          itemsPrice: cart.itemsPrice,
+          shippingPrice: cart.shippingPrice,
+          taxPrice: cart.taxPrice,
+          totalPrice: cart.totalPrice,
+        }).unwrap();
+        dispatch(clearCartItems());
+        navigate(`/order/${res._id}`);
+      } catch (error) {
+        toast.error(error, {position: "top-center"});
+      }
+  }
 
   const dispatch = useDispatch();
   return (
@@ -90,8 +110,8 @@ const PlaceOrder = () => {
                               className="w-20 h-20 object-cover rounded-md"
                             />
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600 hover:text-sky-600">
-                            <Link to={`/product/${item.id}`}>{item.name}</Link>
+                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+                            {item.name}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
                             {item.qty}
@@ -112,9 +132,32 @@ const PlaceOrder = () => {
           </div>
         )}
 
-        <section
+        {error && <Message variant="danger">{error.data.message}</Message>}
+
+        <div className="mt-10">
+        <div className="bg-gray-100 px-4 py-6 rounded-lg sm:px-6 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-8">
+      <dl className="lg:pl-5">
+              <div>
+                <dt className="text-lg font-semibold mt-5 text-gray-900">Shipping address</dt>
+                <dd className="mt-3 text-gray-600">
+                  <span className="block">{cart.shippingAddress.address}</span>
+                  <span className="block">{cart.shippingAddress.city}</span>
+                  <span className="block">{cart.shippingAddress.state}, {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}</span>
+                </dd>
+              </div>
+              <div>
+              <h2 className="text-lg font-semibold my-4">Payment Method</h2>
+                <div className="flex items-center"> 
+                    <p className="text-md font-medium">Method: </p>{cart.paymentMethod} 
+                    {cart.paymentMethod === 'PayPal' && <FaCcPaypal className="ml-2 h-6 w-6" />} 
+                </div>
+             </div>
+            </dl>
+            
+
+            <div
           aria-labelledby="summary-heading"
-          className="mt-10 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-10 lg:p-8"
+          className="mt-5 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-1 lg:p-8"
         >
           <h2
             id="summary-heading"
@@ -175,16 +218,20 @@ const PlaceOrder = () => {
               </dd>
             </div>
           </dl>
-
-          <div className="mt-6">
+        </div>
+        <div className="mt-6 col-span-2">
             <button
               type="submit"
+              disabled={cart.cartItems === 0}
+                onClick={placeOrderHandler}
               className="w-full rounded-md border border-transparent bg-sky-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
             >
               Checkout
             </button>
+            </div>
           </div>
-        </section>
+          {isLoading && <Loader />}
+          </div>
       </div>
     </div>
   );
