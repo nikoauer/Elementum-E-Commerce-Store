@@ -55,7 +55,7 @@ const Cart = () => {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="h-24 w-24 rounded-lg object-cover object-center sm:h-32 sm:w-32"
+                      className="h-24 w-24 rounded-lg object-contain object-center sm:h-32 sm:w-32"
                     />
                   </div>
 
@@ -117,7 +117,8 @@ const Cart = () => {
                 <dl className="-my-4 divide-y divide-gray-200 text-sm">
                   <div className="flex items-center justify-between py-4">
                     <dt className="text-gray-600">Number of Items</dt>
-                    <dd className="font-medium text-gray-900">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</dd>
+                    <dd className="font-medium text-gray-900">{cartItems.reduce((a, c) => a + parseInt(c.qty, 10), 0)}
+</dd>
                   </div>
                   <div className="flex items-center justify-between py-4">
                     <dt className="text-gray-900 text-base font-medium">Subtotal</dt>

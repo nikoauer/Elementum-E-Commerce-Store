@@ -11,10 +11,8 @@ import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { FaArrowLeft,  } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
-import moment from "moment";
 import FavouritesIcon from "./FavouritesIcon";
 import {
-  HeartIcon,
   TagIcon,
   MinusIcon,
   PlusIcon,

@@ -107,7 +107,7 @@ export default function Navigation() {
                     <div>
                       {cartItems.length > 0 && (
                         <span className="absolute bottom-4 left-5">
-                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + c.qty, 0)}</span>
+                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + parseInt(c.qty, 10), 0)}</span>
                         </span>
                       )}
                     </div>
@@ -317,7 +317,7 @@ export default function Navigation() {
                   <span className="ml-2">Cart</span>
                   {cartItems.length > 0 && (
                         <span className="absolute left-24">
-                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + c.qty, 0)}</span>
+                          <span className="  px-1 rounded-full text-sm text-white bg-red-500">{cartItems.reduce((a, c) => a + parseInt(c.qty, 10), 0)}</span>
                         </span>
                       )}
                 </div>

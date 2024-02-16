@@ -89,7 +89,7 @@ const PlaceOrder = () => {
                                 <img
                                   src={item.image}
                                   alt={item.name}
-                                  className="w-20 h-20 object-cover"
+                                  className="w-20 h-20 object-cover rounded-md"
                                 />
                               </td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 hover:text-gray-900">
@@ -98,19 +98,13 @@ const PlaceOrder = () => {
                                 </Link>
                               </td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {item.email}
+                                {item.qty}
                               </td>
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {item.role}
+                                ${item.price.toFixed(2)}
                               </td>
-                              <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                                <a
-                                  href="#"
-                                  className="text-sky-600 hover:text-sky-900"
-                                >
-                                  Edit
-                                  <span className="sr-only">, {item.name}</span>
-                                </a>
+                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                ${( item.qty * item.price.toFixed(2))}
                               </td>
                             </tr>
                           ))}
@@ -123,6 +117,46 @@ const PlaceOrder = () => {
             </div>
           </div>
         )}
+        <section
+            aria-labelledby="summary-heading"
+            className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
+          >
+            <h2 id="summary-heading" className="text-lg font-medium text-gray-900">
+              Order summary
+            </h2>
+
+            <dl className="mt-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <dt className="text-sm text-gray-600">Subtotal</dt>
+                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
+              </div>
+              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                <dt className="flex items-center text-sm text-gray-600">
+                  <span>Shipping estimate</span>
+                </dt>
+                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+              </div>
+              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                <dt className="flex text-sm text-gray-600">
+                  <span>Tax estimate</span>
+                </dt>
+                <dd className="text-sm font-medium text-gray-900">$8.32</dd>
+              </div>
+              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                <dt className="text-base font-medium text-gray-900">Order total</dt>
+                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+              </div>
+            </dl>
+
+            <div className="mt-6">
+              <button
+                type="submit"
+                className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+              >
+                Checkout
+              </button>
+            </div>
+          </section>
       </div>
     </div>
   );
