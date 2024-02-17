@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import logo from "../../images/logo8.svg";
+import logo from "../../images/logo.png";
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
@@ -79,6 +79,29 @@ const Order = () => {
     })
   }
 
+  const deliveryHandler = async () => {
+    await deliveryOrder(orderId);
+    refetch();
+  };
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 60) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -87,7 +110,7 @@ const Order = () => {
     <div className="flex items-center justify-center mt-1">
       <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
         {order.orderItems.length === 0 ? (
-          <Messsage>Order is empty</Messsage>
+          <Message>Order is empty</Message>
         ) : (
           <div className="bg-white">
             <div
@@ -95,7 +118,7 @@ const Order = () => {
               aria-hidden="true"
             />
             <div
-              className="fixed right-0 top-16 hidden h-full w-1/2 bg-sky-700 lg:block"
+              className={`fixed right-0 hidden h-full w-1/2 bg-sky-700 lg:block ${isScrolled ? ('top-0') : ('top-16')}`}
               aria-hidden="true"
             />
 
@@ -116,12 +139,8 @@ const Order = () => {
                 className="bg-sky-700 pb-12 rounded-md text-white md:px-10 lg:col-start-2 lg:row-start-1 lg:mx-auto lg:w-full lg:max-w-lg lg:bg-transparent lg:px-0 lg:pb-24 lg:pt-0"
               >
                 <div className="mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0">
-                  <h2 id="summary-heading" className="sr-only">
-                    Order summary
-                  </h2>
-
                   <dl>
-                    <dd className="mt-1 text-3xl font-bold tracking-tight text-white"></dd>
+                    <dd className="mt-1 text-3xl font-bold tracking-tight text-white">Items</dd>
                   </dl>
 
                   <ul
@@ -141,7 +160,7 @@ const Order = () => {
                         <div className="flex-auto space-y-1">
                           <h3 className="text-white">{item.name}</h3>
                           <p>Qauntity: {item.qty}</p>
-                          <p>${item.price}</p>
+                          <p>$ {item.price}</p>
                         </div>
                         <p className="flex-none text-base font-medium text-white">
                           $ {(item.qty * item.price).toFixed(2)}
@@ -260,6 +279,18 @@ const Order = () => {
                       </div>
                     )}
                   </div>
+                  {loadingDeliver && <Loader />}
+                    {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                    <div>
+                        <button
+                        type="button"
+                        className="rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                        onClick={deliveryHandler}
+                        >
+                        Mark As Delivered
+                        </button>
+                    </div>
+                    )}
                 </div>
               </section>
             </main>
