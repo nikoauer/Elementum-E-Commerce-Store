@@ -142,7 +142,7 @@ const markOrderAsPaid = async(req, res) => {
                 email_address: req.body.payer.email_address,
             }
 
-            const updateOrder = await Order.save()
+            const updateOrder = await order.save()
             res.status(200).json(updateOrder)
         } else{
             res.status(400)
