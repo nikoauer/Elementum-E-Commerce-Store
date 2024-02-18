@@ -14,7 +14,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-
 const Profile = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')

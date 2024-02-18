@@ -246,7 +246,7 @@ const Order = () => {
                   <div className="mt-10">
                     <h3
                       id="PaymentMethod"
-                      className="text-lg font-medium text-gray-800"
+                      className="text-lg font-medium text-gray-800 my-2"
                     >
                       Payment Status
                     </h3>
