@@ -60,7 +60,7 @@ const OrderList = () => {
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="h-11 w-11 flex-shrink-0">
-                          <img className="h-11 w-11 rounded-full border-2 border-blue-300" src={order.orderItems[0].image} alt={order.name} />
+                          <img className="h-11 w-11 rounded-full border-2 border-gray-400" src={order.orderItems[0].image} alt={order.name} />
                         </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">{order._id}</div>

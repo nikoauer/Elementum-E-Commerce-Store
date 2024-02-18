@@ -45,7 +45,7 @@ export const orderAPISlice = apiSlice.injectEndpoints({
       
           deliverOrder: builder.mutation({
             query: (orderId) => ({
-              url: `${ORDERS_URL}/${orderId}/deliver`,
+              url: `${ORDERS_URL}/${orderId}/delivery`,
               method: "PUT",
             }),
           }),

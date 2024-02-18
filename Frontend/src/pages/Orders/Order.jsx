@@ -23,8 +23,7 @@ const Order = () => {
   } = useGetOrderDetailsQuery(orderId);
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
-  const [deliveryOrder, { isLoading: loadingDeliver }] =
-    useDeliverOrderMutation();
+  const [deliveryOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -259,12 +258,12 @@ const Order = () => {
                     )}
                   </div>
 
-                  <div className="mt-10">
+                  <div className="mt-8">
                     <h3 className="text-lg font-medium text-gray-900">
                       Payment Options
                     </h3>
                   </div>
-                  <div className="mt-5 flex justify-center border-t border-gray-200 pt-6">
+                  <div className="mt-3 flex justify-center border-t border-gray-200 pt-6">
                     {!order.isPaid && (
                       <div>
                         {loadingPay && <Loader />}
@@ -281,15 +280,22 @@ const Order = () => {
                   </div>
                   {loadingDeliver && <Loader />}
                     {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                      <>
+                    <div>
+                    <h3 className="text-lg font-medium text-gray-900 border-b border-gray-200 pb-3">
+                      Change Delivery Status
+                    </h3>
+                  </div>
                     <div>
                         <button
                         type="button"
-                        className="rounded-md bg-sky-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                        className="mt-4 rounded-md w-full bg-sky-600  py-2 text-md font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                         onClick={deliveryHandler}
                         >
                         Mark As Delivered
                         </button>
                     </div>
+                    </>
                     )}
                 </div>
               </section>

@@ -85,10 +85,6 @@ const UserOrders = () => {
         <p className="py-3 text-sm text-gray-700">Here you can see a list of your recent orders and their payment status, delivery status and the items purchased.</p>
         </div>
       </div>
-      
-      
-
-
       <div className="mt-1 flow-root">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -119,7 +115,7 @@ const UserOrders = () => {
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="h-11 w-11 flex-shrink-0">
-                          <img className="h-11 w-11 rounded-full border-2 border-blue-300" src={order.orderItems[0].image} alt={order.name} />
+                          <img className="h-11 w-11 rounded-full border-2 border-gray-400" src={order.orderItems[0].image} alt={order.name} />
                         </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">{order._id}</div>
