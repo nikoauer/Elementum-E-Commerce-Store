@@ -1,94 +1,35 @@
 import React from "react";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { Link, NavLink } from "react-router-dom";
-import { useGetMyOrdersQuery } from "../../redux/api/orderAPIslice";
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Link } from "react-router-dom";
+import { useGetOrdersQuery } from "../../redux/api/orderAPIslice";
+import AdminNav from "../Admin/AdminNav"
 
-const UserOrders = () => {
-  const { data: orders, isLoading, error } = useGetMyOrdersQuery();
-
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }  
+const OrderList = () => {
+  const { data: orders, isLoading, error } = useGetOrdersQuery();
 
   return (
-    <div className="flex items-center justify-center mt-5">
+    <div className="flex items-center justify-center mt-1">
       <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
-        {isLoading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">
-            {error?.data?.error || error.error}
-          </Message>
-        ) : (
-          <div>
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
+      ) : (
+        <div>
             <div className="px-4 sm:px-6 lg:px-5">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-        <div className="flex justify-between">
-        <h1 className="text-2xl font-semibold">My Orders</h1>
-        <div className="flex justify-end">
-              <Menu as="div" className="relative inline-block justify-end text-left">
-                  <div>
-                    <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                      Options
-                      <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    </Menu.Button>
-                  </div>
-
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <NavLink
-                              to='/profile'
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              Update Profile
-                            </NavLink>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <NavLink
-                              to='/user-orders'
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              My Orders
-                            </NavLink>
-                          )}
-                        </Menu.Item>
-                      </div>
-                    </Menu.Items>
-                  </Transition>
-            </Menu>
-              </div>
-        </div>
-        <p className="py-3 text-sm text-gray-700">Here you can see a list of your recent orders and their payment status, delivery status and the items purchased.</p>
-        </div>
-      </div>
+            <div className="sm:flex sm:items-center">
+                <div className="sm:flex-auto">
+                <div className="flex justify-between">
+                    <h1 className="text-2xl font-semibold ">All Orders</h1>
+                    <AdminNav />
+                </div>
+                <p className="py-2 text-sm text-gray-700">All orders are displayed here along with allowing you to controll the delivery status on each order.</p>
+                </div>
+            </div>
       
-      
-
-
       <div className="mt-1 flow-root">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -175,10 +116,10 @@ const UserOrders = () => {
       </div>
     </div>
           </div>
-        )}
-      </div>
+      )}
+    </div>
     </div>
   );
 };
 
-export default UserOrders;
+export default OrderList;
