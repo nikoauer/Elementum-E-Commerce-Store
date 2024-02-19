@@ -4,14 +4,15 @@ import {
   useGetTotalOrdersQuery,
   useGetTotalSalesByDateQuery,
   useGetTotalSalesQuery,
+  useGetOrdersQuery
 } from "../../redux/api/orderAPIslice";
 import { useState, useEffect } from "react";
 import AdminNav from "./AdminNav";
 import OrderList from "./OrderList";
 import {
-CurrencyDollarIcon,
-UsersIcon,
-TruckIcon
+  CurrencyDollarIcon,
+  UsersIcon,
+  TruckIcon,
 } from "@heroicons/react/24/outline";
 import Loader from "../../components/Loader";
 
@@ -27,9 +28,9 @@ const AdminDashboard = () => {
         type: "line",
       },
       tooltip: {
-        theme: "dark",
+        theme: "light",
       },
-      colors: ["#00E396"],
+      colors: ["#0066cc"],
       dataLabels: {
         enabled: true,
       },
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
       },
       title: {
         text: "Sales Trend",
-        align: "left",
+        align: "center",
       },
       grid: {
         borderColor: "#ccc",
@@ -102,43 +103,61 @@ const AdminDashboard = () => {
           </div>
         </div>
         <section>
-      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-          <div className="absolute rounded-md bg-blue-500 p-3">
-                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
+          <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <div className="absolute rounded-md bg-blue-500 p-3">
+                <CurrencyDollarIcon
+                  className="h-7 w-7 text-white"
+                  aria-hidden="true"
+                />
               </div>
-            <dt className="text-sm font-medium text-gray-500 ml-16">Total Sales</dt>
-            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">${isLoading ? <Loader /> : sales.totalSales.toFixed(2)}</dd>
-          </div>
+              <dt className="text-sm font-medium text-gray-500 ml-16">
+                Total Sales
+              </dt>
+              <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">
+                ${isLoading ? <Loader /> : sales.totalSales.toFixed(2)}
+              </dd>
+            </div>
 
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-          <div className="absolute rounded-md bg-blue-500 p-3">
+            <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <div className="absolute rounded-md bg-blue-500 p-3">
                 <UsersIcon className="h-7 w-7 text-white" aria-hidden="true" />
               </div>
-            <dt className="text-sm font-medium text-gray-500 ml-16">Total Customers</dt>
-            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : customers?.length}</dd>
-          </div>
+              <dt className="text-sm font-medium text-gray-500 ml-16">
+                Total Customers
+              </dt>
+              <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">
+                {isLoading ? <Loader /> : customers?.length}
+              </dd>
+            </div>
 
-          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-          <div className="absolute rounded-md bg-blue-500 p-3">
+            <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <div className="absolute rounded-md bg-blue-500 p-3">
                 <TruckIcon className="h-7 w-7 text-white" aria-hidden="true" />
               </div>
-            <dt className="text-sm font-medium text-gray-500 ml-16">Total Orders</dt>
-            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : orders?.totalOrders}</dd>
+              <dt className="text-sm font-medium text-gray-500 ml-16">
+                Total Orders
+              </dt>
+              <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">
+                {isLoading ? <Loader /> : orders?.totalOrders}
+              </dd>
+            </div>
+          </dl>
+
+          <div className="flex justify-center mt-8 px-4 border bg-white rounded-md shadow">
+            <div style={{ width: "100%", maxWidth: "1200px" }}>
+              <Chart
+              className='p-5'
+                options={state.options}
+                series={state.series}
+                type="line"
+                width="100%"
+              />
+            </div>
           </div>
-      </dl>
-
-      <div className="flex justify-center mt-10 px-4">
-  <div style={{ width: '100%', maxWidth: '1200px' }}>
-    <Chart
-      options={state.options}
-      series={state.series}
-      type="line"
-      width="100%"
-    />
-  </div>
-</div>
-
+          <div className="mt-10">
+            <OrderList />
+          </div>
 
         </section>
       </div>
