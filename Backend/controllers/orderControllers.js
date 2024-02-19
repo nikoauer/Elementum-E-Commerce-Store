@@ -106,7 +106,7 @@ const calculateTotalSalesByDate = async (req, res) => {
 const calculateTotalSales = async(req, res) => {
     try {
         const orders = await Order.find()
-        const totalSales = orders.reduce((sum, order) => sum +order.totalPrice, 0)
+        const totalSales = orders.reduce((sum, order) => sum + order.totalPrice, 0)
         res.json(totalSales)
     } catch (error) {
         res.status(500).json({error: error.message})

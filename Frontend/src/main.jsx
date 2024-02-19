@@ -32,6 +32,7 @@ import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
 import Order from "./pages/Orders/Order.jsx";
 import UserOrders from "./pages/User/UserOrders.jsx";
 import OrderList from "./pages/Admin/OrderList.jsx";
+import AdminDashboard from "./pages/Admin/AdminDashboard.jsx"
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 
 const router = createBrowserRouter(
@@ -61,6 +62,7 @@ const router = createBrowserRouter(
         <Route path="product/update/:_id" element={<ProductUpdate />} />
         <Route path="allproductslist" element={<AllProducts />} />
         <Route path="orderlist" element={<OrderList />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
       </Route>
     </Route>
   )
