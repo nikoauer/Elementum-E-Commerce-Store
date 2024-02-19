@@ -83,7 +83,7 @@ const AdminDashboard = () => {
             categories: formattedSalesData.map((item) => item.x),
           },
         },
-        serioes: [
+        series: [
           { name: "Sales", data: formattedSalesData.map((item) => item.y) },
         ],
       }));
@@ -102,7 +102,6 @@ const AdminDashboard = () => {
           </div>
         </div>
         <section>
-        <div>
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
           <div className="absolute rounded-md bg-blue-500 p-3">
@@ -128,7 +127,19 @@ const AdminDashboard = () => {
             <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : orders?.totalOrders}</dd>
           </div>
       </dl>
-    </div>
+
+      <div className="flex justify-center mt-10 px-4">
+  <div style={{ width: '100%', maxWidth: '1200px' }}>
+    <Chart
+      options={state.options}
+      series={state.series}
+      type="line"
+      width="100%"
+    />
+  </div>
+</div>
+
+
         </section>
       </div>
     </div>
