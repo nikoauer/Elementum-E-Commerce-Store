@@ -110,7 +110,7 @@ const AdminDashboard = () => {
           <div className="absolute rounded-md bg-indigo-500 p-3">
                 <CurrencyDollarIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
-            <dt className="truncate text-sm font-medium text-gray-500">$ {isLoading ? (<Loader />) : (sales.totalSales.toFixed(2))}</dt>
+            <dt className="text-sm font-medium text-gray-500">$ {isLoading ? <Loader /> : sales.totalSales}</dt>
             <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900"></dd>
           </div>
       </dl>
