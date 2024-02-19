@@ -9,7 +9,9 @@ import { useState, useEffect } from "react";
 import AdminNav from "./AdminNav";
 import OrderList from "./OrderList";
 import {
-CurrencyDollarIcon
+CurrencyDollarIcon,
+UsersIcon,
+TruckIcon
 } from "@heroicons/react/24/outline";
 import Loader from "../../components/Loader";
 
@@ -88,10 +90,6 @@ const AdminDashboard = () => {
     }
   }, [salesDetail]);
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   return (
     <div className="flex items-center justify-center mt-5">
       <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
@@ -116,7 +114,7 @@ const AdminDashboard = () => {
 
           <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
           <div className="absolute rounded-md bg-blue-500 p-3">
-                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
+                <UsersIcon className="h-7 w-7 text-white" aria-hidden="true" />
               </div>
             <dt className="text-sm font-medium text-gray-500 ml-16">Total Customers</dt>
             <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : customers?.length}</dd>
@@ -124,7 +122,7 @@ const AdminDashboard = () => {
 
           <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
           <div className="absolute rounded-md bg-blue-500 p-3">
-                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
+                <TruckIcon className="h-7 w-7 text-white" aria-hidden="true" />
               </div>
             <dt className="text-sm font-medium text-gray-500 ml-16">Total Orders</dt>
             <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : orders?.totalOrders}</dd>
