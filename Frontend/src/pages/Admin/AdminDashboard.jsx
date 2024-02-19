@@ -107,11 +107,27 @@ const AdminDashboard = () => {
         <div>
       <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-          <div className="absolute rounded-md bg-indigo-500 p-3">
-                <CurrencyDollarIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          <div className="absolute rounded-md bg-blue-500 p-3">
+                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
               </div>
-            <dt className="text-sm font-medium text-gray-500">$ {isLoading ? <Loader /> : sales.totalSales}</dt>
-            <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900"></dd>
+            <dt className="text-sm font-medium text-gray-500 ml-16">Total Sales</dt>
+            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">${isLoading ? <Loader /> : sales.totalSales.toFixed(2)}</dd>
+          </div>
+
+          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+          <div className="absolute rounded-md bg-blue-500 p-3">
+                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
+              </div>
+            <dt className="text-sm font-medium text-gray-500 ml-16">Total Customers</dt>
+            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : customers?.length}</dd>
+          </div>
+
+          <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+          <div className="absolute rounded-md bg-blue-500 p-3">
+                <CurrencyDollarIcon className="h-7 w-7 text-white" aria-hidden="true" />
+              </div>
+            <dt className="text-sm font-medium text-gray-500 ml-16">Total Orders</dt>
+            <dd className="mt- text-3xl font-semibold tracking-tight text-gray-900 ml-16">{isLoading ? <Loader /> : orders?.totalOrders}</dd>
           </div>
       </dl>
     </div>
