@@ -102,7 +102,7 @@ const ProductDetails = () => {
           ) : (
             <>
               <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-                <div className="col-1">
+                <div className="col-1 lg:mt-32 sm:mt-10">
                 <img
                   src={product.image}
                   alt={product.name}

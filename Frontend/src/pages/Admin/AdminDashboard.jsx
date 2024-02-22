@@ -4,7 +4,6 @@ import {
   useGetTotalOrdersQuery,
   useGetTotalSalesByDateQuery,
   useGetTotalSalesQuery,
-  useGetOrdersQuery
 } from "../../redux/api/orderAPIslice";
 import { useState, useEffect } from "react";
 import AdminNav from "./AdminNav";
@@ -30,7 +29,7 @@ const AdminDashboard = () => {
       tooltip: {
         theme: "light",
       },
-      colors: ["#0066cc"],
+      colors: ["#00A36C"],
       dataLabels: {
         enabled: true,
       },
@@ -73,9 +72,15 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (salesDetail) {
       const formattedSalesData = salesDetail.map((item) => ({
-        x: item._id,
+        x: new Date(item._id).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        }),
         y: item.totalSales,
-      }));
+      })).sort((a, b) => new Date(a.x) - new Date(b.x));
+  
+
       setState((previousState) => ({
         ...previousState,
         options: {
