@@ -4,6 +4,7 @@ import {selectFavouriteProduct} from '../../redux/features/favourites/favourites
 import Product from './Product'
 import FavouritesIcon from './FavouritesIcon'
 import { Link } from 'react-router-dom'
+import logo from '../../images/logo.png'
 
 
 const Favourites = () => {
@@ -16,7 +17,22 @@ const Favourites = () => {
       </div>
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="pt-5 pb-5 font-semibold leading-6 text-gray-900 text-2xl">Your favourite products</h1>
+          <h1 className="pt-5 pb-5 font-bold leading-6 text-gray-900 text-3xl">My Favourites</h1>
+          {favourites.length === 0 ? (
+            <div className='mt-20'>
+            <img
+            className="mx-auto h-20 w-20"
+            src={logo}
+            alt="Elementum Logo"
+          />
+          <div className="mx-auto max-w-2xl text-center sm:mt-10">
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Looks like you have no favourites saved</h1>
+            <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
+              Check out our <Link to='/shop' className='text-sky-600 hover:text-sky-700 font-semibold'>store</Link>
+            </p>
+          </div>
+          </div>
+          ) : (
           <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
             {
                 favourites.map((product) => (
@@ -54,6 +70,7 @@ const Favourites = () => {
                 ))
             }
             </div>
+            )}
         </div>
       </div>
     </div>

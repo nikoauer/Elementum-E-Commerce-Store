@@ -23,7 +23,7 @@ const Home = () => {
             <div className="relative">
               <img src={Banner} alt="Be in your element" className="min-w-full" />
               <div className="absolute xl:left-10 md:left-10 sm:left-5 top-1/2 transform -translate-y-1/2 sm:w-1/3  md:w-1/3 lg:w-1/3">
-                <h1 className="text-white xl:text-8xl md:text-5xl sm:text-3xl font-bold mb-2">
+                <h1 className="text-white xl:text-8xl lg:text-5xl md:text-4xl sm:text-3xl font-bold mb-2 sm:py-2">
                   Don't let the elements stop the adventure
                 </h1>
                   <Link to="/shop" className="inline-flex items-center bg-sky-500 hover:bg-sky-600 text-black hover:text-white px-2 sm:px-4 py-1 sm:py-2 rounded text-sm sm:text-base">

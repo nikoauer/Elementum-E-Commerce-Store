@@ -32,7 +32,7 @@ const Cart = () => {
         {cartItems.length === 0 ? (
           <div className='mt-20'>
           <img
-          className="mx-auto h-10 w-auto sm:h-12"
+          className=" mx-auto h-20 w-20"
           src={logo}
           alt="Elementum Logo"
         />
