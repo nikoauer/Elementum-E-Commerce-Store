@@ -4,7 +4,7 @@ router.use(express.json());
 
 
 import { authAdmin, authenticateUser } from "../middlewares/authMiddleware.js";
-import checkID from "../middlewares/checkId.js";
+import checkID from "../middlewares/checkID.js";
 
 import {
   addProduct,
