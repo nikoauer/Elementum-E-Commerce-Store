@@ -65,14 +65,6 @@ const Footer = () => {
   return (
     <footer className="bg-white">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-      <div className="relative">
-      <div className="absolute inset-0 flex items-center" aria-hidden="true">
-        <div className="w-full border-t border-gray-300" />
-      </div>
-      <div className="relative flex justify-center">
-        <span className="bg-white px-2 text-sm text-gray-500"><img src={logo} alt="" className='h-10 w-10' /></span>
-      </div>
-    </div>
         <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12 pt-7" aria-label="Footer">
           {navigation.main.map((item) => (
             <div key={item.name} className="pb-6">
