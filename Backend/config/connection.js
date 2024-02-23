@@ -1,16 +1,21 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+
+const { connect, connection } = mongoose;
 
 const connectDB = async () => {
   try {
-      const connection = await mongoose.connect(process.env.DATABASE_URI);
+    const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/Elementum';
 
-      console.log('Connected to Mongo Database 👍🏽')
+    await connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-      return connection;
+    console.log('MongoDB Connected...');
   } catch (error) {
-      console.error(error.message);
-      process.exit(1);
+    console.error(error.message);
+    process.exit(1);
   }
-}
+};
 
 export default connectDB;
