@@ -1,4 +1,4 @@
-# <ELMNTM-Ecommerce-site>
+# ELMNTM-Ecommerce-site
 
 ## Description
 
