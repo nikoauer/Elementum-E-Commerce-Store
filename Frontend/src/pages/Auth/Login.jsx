@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoginMutation } from "../../redux/api/usersAPISlice";
-import { setCredientials } from "../../redux/features/auth/authSlice";
+import { useLoginMutation } from "../../redux/api/usersAPISlice.js";
+import { setCredientials } from "../../redux/features/auth/authSlice.js";
 import logo from "../../images/logo8.svg";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
