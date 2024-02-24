@@ -1,4 +1,4 @@
-const Message = ({ variant, children}) => {
+const Message = ({ variant, children }) => {
     const getVariantClass = () => {
         switch(variant) {
             case "success":
