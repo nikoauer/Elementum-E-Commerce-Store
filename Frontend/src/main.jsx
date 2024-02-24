@@ -11,7 +11,7 @@ import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 
 //Private directories
-import PrivateRoute from "./components/privateRoutes.jsx";
+import PrivateRoute from "./components/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import AdminRoutes from "./pages/Admin/AdminRoutes.jsx";
 import UserList from "./pages/Admin/UserList.jsx";
