@@ -5,7 +5,6 @@ import Loader from "../components/Loader";
 import Carousel from "../components/Carousel";
 import Banner from "../images/Homebanner.png";
 import Product from "./Products/Product";
-import { FaArrowRight } from "react-icons/fa";
 
 
 
@@ -18,7 +17,7 @@ const Home = () => {
         <Loader />
       ) : isError ? (
         <Message variant="danger">
-          {isError?.data.message || isError.error}
+           {isError?.data?.message || "An error occurred"} 
         </Message>
       ) : (
         <>
@@ -31,14 +30,13 @@ const Home = () => {
   </div>
 </div>
 
-
-
           <div className="flex items-center justify-center mt-1">
             <div className="px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl">
               <div className="pt-5 pb-5">
                 <Carousel />
               </div>
             <div>
+              
   
             <div className="sm:flex sm:items-baseline sm:justify-between mt-5">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900">New Tents</h1>
