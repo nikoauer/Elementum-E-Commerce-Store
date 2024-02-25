@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import moment from 'moment'
 import { useAllProductsQuery } from "../../redux/api/productAPISlice"
 import AdminNav from "./AdminNav"
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader.jsx"
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 
 
