@@ -2,7 +2,7 @@ import React from "react";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Link, NavLink } from "react-router-dom";
-import { useGetMyOrdersQuery } from "../../redux/api/orderAPIslice";
+import { useGetMyOrdersQuery } from "../../redux/api/orderAPISlice";
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'

@@ -4,7 +4,7 @@ import {
   useGetTotalOrdersQuery,
   useGetTotalSalesByDateQuery,
   useGetTotalSalesQuery,
-} from "../../redux/api/orderAPIslice";
+} from "../../redux/api/orderAPISlice";
 import { useState, useEffect } from "react";
 import AdminNav from "./AdminNav";
 import OrderList from "./OrderList";

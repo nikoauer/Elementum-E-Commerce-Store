@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLoginMutation } from "../../redux/api/usersAPISlice.js";
 import { setCredientials } from "../../redux/features/auth/authSlice.js";
 import logo from "../../images/logo8.svg";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loader.jsx";
 import { toast } from "react-toastify";
 
 const Login = () => {

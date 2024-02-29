@@ -2,7 +2,7 @@ import React from "react";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
-import { useGetOrdersQuery } from "../../redux/api/orderAPIslice";
+import { useGetOrdersQuery } from "../../redux/api/orderAPISlice";
 import AdminNav from "../Admin/AdminNav"
 
 const OrderList = () => {

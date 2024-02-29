@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message";
 import ProgressSteps from "../../components/ProgressStep";
 import Loader from "../../components/Loader";
-import { useCreateOrderMutation } from "../../redux/api/orderAPIslice";
+import { useCreateOrderMutation } from "../../redux/api/orderAPISlice";
 import { clearCartItems } from "../../redux/features/cart/cartSlice";
 import { FaCcPaypal } from "react-icons/fa";
 
