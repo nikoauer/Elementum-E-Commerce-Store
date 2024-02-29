@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery } from "../redux/api/productAPISlice";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader.jsx";
 import Carousel from "../components/Carousel";
 import Banner from "../images/Homebanner.png";
 import Product from "./Products/Product";
