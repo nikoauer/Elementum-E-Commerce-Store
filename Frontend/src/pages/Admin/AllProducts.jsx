@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import moment from 'moment'
 import { useAllProductsQuery } from "../../redux/api/productAPISlice"
 import AdminNav from "./AdminNav"
-import Loader from "../../components/Loader.jsx"
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 
 
@@ -11,7 +10,11 @@ const AllProducts = () => {
    const {data: products, isLoading, isError} = useAllProductsQuery() 
 
     if(isLoading) {
-        return <Loader/>
+        return <div className="flex justify-center">
+        <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-blue-600">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
     }
 
     if(isError) {
