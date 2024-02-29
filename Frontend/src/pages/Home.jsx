@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery } from "../redux/api/productAPISlice";
 import Message from "../components/Message";
-import Loader from "../components/Loader.jsx";
 import Carousel from "../components/Carousel";
 import Banner from "../images/Homebanner.png";
 import Product from "./Products/Product";
@@ -14,7 +13,11 @@ const Home = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <div className="flex justify-center">
+        <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-blue-600">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
       ) : isError ? (
         <Message variant="danger">
            {isError?.data?.message || "An error occurred"} 
