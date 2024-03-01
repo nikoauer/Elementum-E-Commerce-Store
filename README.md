@@ -31,6 +31,8 @@ Additional features:
 
 This project proved to be quite challenging, especially in understanding how to properly use react redux to communicate between the front end and backend. Also this was my first tailwind project which also proved to have it's own challenges especially around effectively using its responsive funcitonality. 
 
+Feel free to try out the admin functionality by logging in as, Niko@gmail.com for the email, and password is the password otherwise feel free to create an account as a customer to see the customer functionality.
+
 ![Screenshot1](screenshots/screenshot1.png)
 ![Screenshot2](screenshots/screenshot2.png)
 ![Screenshot3](screenshots/screenshot3.png)
