@@ -7,11 +7,8 @@ export default defineConfig({
   server: {
     open: true,
     proxy: {
-      "/api/": "https://elementum-e-commerce-store-backend.onrender.com/",
-      "/uploads/": "https://elementum-e-commerce-store-backend.onrender.com/",
+      "/api/": "http://localhost:3000",
+      "/uploads/": "http://localhost:3000",
     },
   },
 });
-
-// "/api/": "http://localhost:3000",
-// "/uploads/": "http://localhost:3000",
